@@ -352,6 +352,62 @@ int main(){
     9
     14
     */
+
+
+
+    /*
+    ASSIGNMENT AND INCREMENT OPERATORS
+    Assignment Operators: The simple operator (=) assigns the right side to the left side.
+
+    C++ provides shorthand operators that have the capability of performing an operation and an assignment at the same time.
+    
+    Assignment operator (=) assigns the right side to the left side.
+
+    The same shorthand syntax applies to multiplication, division, and modulus operators.
+
+    Increment Operator: the increment operator is used to increase an integer's value by one, and is a commonly used c++ operator.
+
+    Increment Operator has two forms, prefix and postfix.
+
+    Prefix increments the value, and then proceeds with the expression.
+    Postfix evaluates the expression and then performs the incrementing.
+
+    The prefix example increments the value of x, and then assigns it to y.
+    The postfix example assigns the value of x to y, and then increments it.
+
+    Decrement Operator: the decrement operator (-) works in much the same way as the increment operator, but instead of increasing the value, it decreases it by one.
+    */
+    cout << "9. Assignment and increment operators" << endl;
+
+    x = 10;
+    x += 4; // equivalent to x = x + 4
+    x -= 5; // equivalent to x = x - 5
+    x *= 3; // equivalent to x = x * 3
+    x /= 2; // equivalent to x = x / 2
+    x %= 4; // equivalent to x = x % 4
+    x++; // equivalent to x = x + 1
+    x = 11;
+    x++;
+    cout << x << endl;
+    // outputs 12
+    ++x; // prefix
+    x++; // postfix
+    x = 5;
+    y = ++x;
+    // x is 6, y is 6
+    x = 5;
+    y = x++;
+    // x is 6, y is 5
+    --x; // prefix
+    x--; // postfix
+
+    cout << endl << endl;
+    /*
+    Output:
+    12
+    */
+
+
     
     return 0;
     /*
