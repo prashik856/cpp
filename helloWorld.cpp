@@ -327,18 +327,18 @@ int main(){
 
     int x = 40 + 60;
     cout << x << endl;
-    x = 100 - 60
+    x = 100 - 60;
     cout << x << endl;
     x = 5*6;
     cout << x << endl;
-    x = 10/3
+    x = 10/3;
     cout << x << endl;
     x = 25 % 7;
     cout << x << endl;
-    x = 5 + 2 * 2
+    x = 5 + 2 * 2;
     cout << x << endl;
     //outputs 14
-    x = (5 + 2) * 2
+    x = (5 + 2) * 2;
     cout << x << endl;
     //outputs 14
     cout << endl << endl;
@@ -393,7 +393,7 @@ int main(){
     ++x; // prefix
     x++; // postfix
     x = 5;
-    y = ++x;
+    int y = ++x;
     // x is 6, y is 6
     x = 5;
     y = x++;
@@ -408,7 +408,345 @@ int main(){
     */
 
 
+    /*
+    THE if STATEMENT:
+    The if statement is used to execute some code if a condition is true
+    Syntax:
+    if (condition){
+        statements
+    }
+    The condition specifies which expression is be be evaluated.
+    If the condition is true, the satements in the curly brackets are executed.
+
+    If the condition is false, the statements are simply ignored, and the program continues to run after the if statement body.
+
+    We use rational operators to evaluate conditions.
+
+    The if statement evaluates the condition (7>4), finds it to be true, and then executes the cout statement.
+    If we change the greater operator to a less than operator (7<4), the statement will not be executed and nothing will be 
+    printed out.
     
+    A condition specified in an if statement does not require a semicolon.
+
+    Rational Operators: Additional rational operators
+    >=  :   Greater than or equal to    : 7 >= 4    True
+    <=  :   Less than or equal to       : 7 <= 4    False
+    ==  :   Equal to                    : 7 == 4    False
+    !=  :   Not equal to                : 7 != 4    True
+    The not equal to operator evaluates the operand, determines whether or not they are equal.
+    If the operands are not equal, the condition is evaluated to be true.
+    The example of not equal to operator, the condition in if statement evaluates to false and the block
+    of code is not executed.
+
+    We can use the rational operators to compare variables in the if statement.
+    */
+    
+    cout << "10. The if Statement." << endl;
+
+    if (7 > 4){
+        cout << "Yes" << endl;
+    }
+    //Outputs "Yes"
+    if (10 == 10){
+        cout << "Yes" << endl;
+    }
+    //Outputs "Yes"
+    if (10 != 10){
+        cout << "Yes" << endl;
+    }
+    a = 55;
+    b = 33;
+    if(a > b){
+        cout << "a is greater than b" << endl;
+    }
+    //Outputs "a is greater than b"
+
+    cout << endl << endl;
+    /*
+    Output:
+    Yes
+    Yes
+    a is greater than b
+    */
+
+
+
+    /*
+    THE else STATEMENT
+    An if statement can be followed by an optional else statement, which executes when the condition is false.
+    Syntax:
+    if (condition){
+        //statements
+    }
+    else{
+        //statements
+    }
+    The code above will test the condition:
+        - if it evaluates to true, then the code inside the if statement will be executed.
+        - if it evaluates to false, then the code inside the else statement will be executed.
+    
+    When only one statement is used inside the if/else, then curly braces can be omitted.
+
+    We may include many statements inside if/else statement.
+
+    Nested if Statements: We can also include, or nest, if statements within another if statement.
+
+    Nested if else Statements: C++ provides an option of nesting an unlimited number of if/else statements.
+
+    Remember that all else statements must have corresponding if statements.
+
+    In if/else statements, a single statement can be included without enclosing it into curly braces
+    */
+    cout << "11. The else Statement" << endl;
+
+    int mark = 90;
+    if(mark < 50){
+        cout << "You failed." << endl;
+    } else{
+        cout << "You passed." << endl;
+    }
+    //Outputs "You passed."
+    if(mark < 50){
+        cout << "You failed." << endl;
+        cout << "Sorry" << endl;
+    } else{
+        cout << "Congratulations!" << endl;
+        cout << "You passed." << endl;
+        cout << "You are awesome!" << endl;
+    }
+    mark = 100;
+    if (mark >= 50){
+        cout << "You passed." << endl;
+        if (mark == 100){
+            cout << "Perfect!" << endl;
+        }
+    } else {
+        cout << "You failed." << endl;
+    }
+    int age = 18;
+    if (age > 14) {
+        if (age >= 18) {
+            cout << "Adult" << endl;
+        } else {
+            cout << "Teenager" << endl;
+        }
+    } else {
+        if (age > 0) {
+            cout << "Child" << endl;
+        } else {
+            cout << "Something's wrong" << endl;
+        }
+    }
+    a = 10;
+    if (a > 4)
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
+
+    cout << endl << endl;
+    /*
+    Output:
+    You passed.
+    Congratulations!
+    You passed.
+    You are awesome!
+    You passed.
+    Perfect!
+    "Yes"
+    */
+
+
+
+    /*
+    THE WHILE LOOP
+    Loops: A loop repeatedly executed a set of statements until a particular condition is satisfied.
+
+    A while loop statement repeatedly executes a target statement as long as given condition remains true.
+    Syntax:
+    while(condition){
+        statements(s);
+    }
+    The loop iterates while the condition is true.
+
+    At the point when the condition becomes false, program control is shifted to the line that immediately 
+    follows the loop.
+
+    The loop's body is the block of statements within curly braces.
+
+    The example below declares a variable equal to 1 (num = 1).
+    The while loop checks the condition (num<6), and executes the statements in its body, which increment the value
+    of num by one each time the loop runs.
+    
+    After the 5th iteration, num becomes 6, and the condition is evaluated to false, and the loop stops running.
+
+    The increment value can be changed.
+    If changed, the number of times the loop is running will change, as well.
+    
+    Without a statement that eventually evaluates the loop condition to false, the loop will continue indefinitely.
+
+    Using Increment or Decrement: the increment or decrement orperators can be used to change values in the loop.
+    num++ is equivalent to num = num + 1
+
+    A loop can be used to obtain multiple inputs from the user.
+
+    We can modity our code to calculate the sum of the numbers the user has entered.
+    The code below will add the number entered by the user to the total variable with each loop iteration.
+    Once the loop stops executing, the value of total is printed.
+    The value is the sum of all the numbers the user entered.
+    The total variable has the initial value 0.
+    */
+
+    cout << "12. The While Loop" << endl;
+
+    num = 1;
+    while(num < 6) {
+        cout << "Number: " << num << endl;
+        num++;
+    }
+    /*
+    Outputs
+    Number: 1
+    Number: 2
+    Number: 3
+    Number: 4
+    Number: 5
+    */
+    num = 1;
+    while (num < 6) {
+        cout << "Number: " << num << endl;
+        num = num + 3;
+    }
+    /*
+    Outputs
+    Number: 1
+    Number: 4
+    */
+    num = 1;
+    int number;
+    while (num <= 5){
+        //cin >> number;
+        num++;
+    }
+    // When uncommented, this code will asks for user input 5 times, and each time saves the input
+    // in the number variable.
+    num = 1;
+    number;
+    int total = 0;
+    while (num <= 5) {
+        //cin >> number;
+        total += number;
+        num++;
+    }
+    // cout << total << endl;
+    // If the above statement is uncommented, it Outputs the total sum of the numbers entered.
+
+    cout << endl << endl;
+    /*
+    Output:
+    Number: 1
+    Number: 2
+    Number: 3
+    Number: 4
+    Number: 5
+    Number: 1
+    Number: 4
+    */
+
+
+
+    /*
+    THE FOR LOOP
+    A for loop is a repetition control structure that allows us to efficiently write a loop that executes a 
+    specific number of times.
+    Syntax:
+    for (init; condition; increment) {
+        statement(s);
+    }
+
+    The init step is executed first, and does not repeat.
+    The condition is evaluated, and the body of the loop is executed if the condition is true.
+    In the next step, the increment statement updates the loop control variable.
+    Then, the loop's body repeats itself, only stopping when the condition becomes false.
+
+    The init and increment statements may be left out, if not needed, but remember that the
+    semicolons are mandatory.
+
+    In the init step, we declared a variable a and set it to equal 0.
+    a < 10, is the condition.
+    After each iteration, the a++ increment statement is executed.
+    
+    When a increments to 10, the condition evaluates to false, and the loop stops.
+
+    It's possible to change the increment statement.
+    We can also use the decrement in the statement.
+    */
+    cout << "13. The For Loop" << endl;
+
+    for(int x = 1; x < 10; x++) {
+        //some code
+    }
+    for(int a = 0; a < 10; a++) {
+        cout << a << endl;
+    }
+    /*
+    Outputs
+    0
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    */
+    for (int a = 0; a < 50; a+=10) {
+        cout << a << endl;
+    }
+    /*
+    Outputs
+    0
+    10
+    20
+    30
+    40
+    */
+    for ( int a = 10; a >= 0; a -= 3){
+        cout << a << endl;
+    }
+    /*
+    Ouputs
+    10
+    7
+    4
+    1
+    */
+
+    cout << endl << endl;
+    /*
+    Output:
+    0
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    0
+    10
+    20
+    30
+    40
+    10
+    7
+    4
+    1
+    */
+
     return 0;
     /*
     RETURN:
