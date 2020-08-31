@@ -747,6 +747,264 @@ int main(){
     1
     */
 
+
+
+
+    /*
+    THE DO...WHILE LOOP
+    Unlike for and while loops, which test the loop condition at the top of the loop, the do...wihle loop
+    checks its condition at the bottom of the loop.
+    A do...while loop is similar to while loop.
+    The one difference is that the do...while loop is guaranteed to execute at least one time.
+    Syntax:
+    do {
+        statements(s)
+    } while (condition);
+
+    For example, we can take input from the user, then check it.
+    If the input is wrong, we can take it again.
+
+    Don't forget the semicolon after the while statement.
+
+    while vs. do...while loop: If the condition evaluated to false, the statements in the 
+    do would still run once.
+
+    The do...while loop executes the statements at least once, and then tests the condition.
+    The while loop executes the statement after testing confition.
+
+    As with other loops, if the condition in the loop never evaluates to false, the loop will run forever.
+
+    Always test our loops, so we know that they operate in the manner we expect.
+    */
+    cout << "14. The do...while loop" << endl;
+
+    a = 0;
+    do {
+        cout << a << endl;
+        a++;
+    } while (a < 5);
+    /*
+    Outputs
+    0
+    1
+    2
+    3
+    4
+    */
+    a = 45;
+    do {
+        cout << a << endl;
+        a++;
+    } while(a < 5);
+    // Outputs 42
+    a = 42;
+    // do {
+    //     cout << a << endl;
+    // } while (a>0);
+    //If we uncomment the above three lines, the do..while loop will run forever.
+
+    cout << endl << endl;
+    /*
+    Output:
+    0
+    1
+    2
+    3
+    4
+    42
+    */
+
+
+
+    /*
+    THE SWITCH STATEMENT:
+    Multiple Conditions: Sometimes there is a need to test a variable for equality against multiple values.
+    That can be achieved using multiple if statements
+
+    The switch statement is a more elegant solution to this scenario.
+
+    The switch statement tests a variable against a list of values, which are called cases, 
+    to determine whether it is equal to any of them.
+    Syntax:
+    switch(expression){
+        case value1:
+            statement(s);
+            break;
+        case value2:
+            statement(s);
+            break;
+        ...
+        case valueN:
+            statement(s);
+            break;
+    }
+    Switch evaluates the expression to determine whether it is equal to the value in the case statement.
+    If a match is found, it executes the statements in that case.
+
+    A switch can contain any number of case statements, which are followed by the value in question and a colon.
+
+    Notice the keyword break; that follows each case.
+
+    The default Case: In a switch statement, the optional default case can be used to perform a task when none
+    of the cases is determined to be true.
+    The default statement's code executes when none of the cases matches the switch expression.
+    The default case must appear at the end of the switch.
+
+    The break statement: The break statement's role is to terminate the switch statement.
+    In instances in which the variable is equal to a case, the statements that come after the case continue
+    to execute until they encounter a break statement.
+    In other words, leaving out a break statement results in the execution of all of the statements
+    in the following cases, even those that don't match the expression.
+
+    As we can see, the program executed the matching case statement, printing "Adult" to the screen.
+    With no specified break statements, the statements continued to run after the matching case.
+    Thus, all the other case statement printed.
+    This type of behavior is called fall-through.
+
+    As the switch statement's final case, the default case requires no break statement.
+    The break statement can also be used to break out of a loop.
+    */
+    cout << "15. The switch Statement" << endl;
+
+    age = 42;
+    if (age == 16) {
+        cout << "Too young" << endl;
+    }
+    if (age == 42) {
+        cout << "Adult" << endl;
+    }
+    if (age == 72) {
+        cout << "Senior" << endl;
+    }
+    //Outputs Adult
+    age = 42;
+    switch (age) {
+        case 16:
+            cout << "Too young" << endl;
+            break;
+        case 42:
+            cout << "Adult" << endl;
+            break;
+        case 70:
+            cout << "Senior" << endl;
+            break;
+    }
+    // The code above is equivalent to three if statements.
+    age = 25;
+    switch (age) {
+        case 16:
+            cout << "Too young" << endl;
+            break;
+        case 42:
+            cout << "Adult" << endl;
+            break;
+        case 70:
+            cout << "Senior" << endl;
+            break;
+        default:
+            cout << "This is the default case" << endl;
+    }
+    //Outputs "This is the default case"
+    age = 42;
+    switch (age) {
+        case 16:
+            cout << "Too young" << endl;
+        case 42:
+            cout << "Adult" << endl;
+        case 70:
+            cout << "Senior" << endl;
+        default:
+            cout << "This is the default case" << endl;
+    }
+    /*
+    Outputs
+    Adult
+    Senior
+    This is the default case
+    */
+
+    cout << endl << endl;
+    /*
+    Output:
+    Adult
+    Adult
+    This is the default case.
+    Adult
+    Senior
+    This is the default case
+    */
+
+
+    /*
+    LOGICAL OPERATORS
+    Use logical operators to combine conditional statements and return true or false.
+    Operator        Name of Operator        Form
+    &&              AND Operator            y && y
+    ||              OR Operator             x || y
+    !               NOT Operator            !x
+
+    The AND Operator works the following way
+    Left Operand           Right Operand        Result
+    false                   false               false
+    false                   true                false
+    true                    false               false
+    true                    true                true
+    In AND Operator, both operands must be true for the entire expression to be true.
+    Within a single if statement, logical operators can be used to combine multiple conditions.
+    The entire expression evaluates to true only if all of the conditions are true.
+
+    The OR Operator: The OR (||) operator returns true if any one of its operands is true.
+    Left Operand            Right Operand       Result
+    false                   false               false
+    false                   true                true
+    true                    false               true
+    true                    true                true
+    We can combine any number of logical OR statements we want.
+    In addition, multiple OR and AND statements may be chained together.
+
+    The NOT Operator: 
+    The logical NOT (!) Operator works with just a single operand, reversing its logical state.
+    Thus, if a condition is true, the NOT operator makes it false, and vice versa.
+    Right Operand           Result
+    true                    false  
+    false                   true
+    We need to be very careful using this, since !false is true.
+    */
+    cout << "16. Logical Operators" << endl;
+    
+    age = 20;
+    if (age > 16 && age < 60) {
+        cout << "Accepted!" << endl;
+    }
+    // Outputs "Accepted!"
+    // In the above example, the logical AND operator was used to combine both expressions.
+    // The expression in the if statement evaluates to true only if both expressions are true.
+    age = 20;
+    int grade = 80;
+    if (age > 16 && age < 60 && grade > 50) {
+        cout << "Accepted!" << endl;
+    }
+    // Outputs Accepted!
+    age = 16;
+    int score = 90;
+    if (age > 20 || score > 50) {
+        cout << "Accepted!" << endl; 
+    }
+    // Outputs Accepted!
+    age = 10;
+    if (!(age > 16)) {
+        cout << "Your age is less than 16" << endl;
+    }
+    // Output Your age is less than 16
+
+    cout << endl << endl;
+    /*
+    Output:
+    Accepted!
+    Accepted!
+    Accepted!
+    */
+
     return 0;
     /*
     RETURN:
