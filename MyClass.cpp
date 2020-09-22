@@ -37,9 +37,9 @@ void MyClass::myPrint() const {
     // As suchk it can be called by our constant ojbect.
 }
 
-/*
-void MyClass::MyClass(int a, int b){
+// Constructor when two integers are given.
+MyClass::MyClass(int a, int b){
     regVar = a;
     constVar = b;
 }
-*/
+

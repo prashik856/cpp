@@ -30,10 +30,66 @@ class Birthday {
 
 class Person{
     public:
-    
+        Person(string nameValue, Birthday birthdayValue): name(nameValue), birthday(birthdayValue) {
+
+        }
+        void printInfo(){
+            cout << name << endl;
+            birthday.printDate();
+        }
+        // Notice that we call the birthday member's printDate() function, since it's of type Birthday,
+        // which has that function defined.
     private:
+        string name;
+        Birthday birthday;
+};
+// We create Person class, which includes the Birthday class.
+// The Person class has a name and a Birthday member, and a constructor to initialize them.
+// Ensure that the corresponding header files are included (If created).
+
+
+class MyClass3 {
+    public:
+        MyClass3(int a): var(a){
+
+        }
+        void printInfo(){
+            cout << var << endl;
+            cout << this->var << endl;
+            cout << (*this).var << endl;
+        }
+        // printInfo() method offers three alternatives for printing the member variable of the class.
+        // this is a pointer to the object, so the arrow selection operator is used to select the member variable.
+    private:
+        int var;
 };
 
+
+class MyClass4 {
+    private:
+    public:
+        int var;
+        MyClass4() {}
+        MyClass4(int a): var(a){}
+    
+    // Now, we need to define what our function does.
+    // We need our + operator to return a new MyClass4 object with a member variable equal to sum of the 
+    // two object's member variables.
+    MyClass4 operator+(MyClass4 &obj){
+        MyClass4 res;
+        res.var = this->var+obj.var;
+        return res;
+    }
+    // Here, we declared a new res object.
+    // We then assigned the sum of the member variables of the current object (this) and the parameter object (obj)
+    // to the res object's var member variable.
+    // The res object is returned as the result
+    // This gives us the ability to create objects in main and use the overloaded + operator to add them together.
+    
+};
+// A simple class to demonstrate operator overloading.
+// Our clss has two constructors and one member variable.
+// We will be overloading the + operator, to enable adding two objects of our class together.
 
 
 int main(){
@@ -200,7 +256,118 @@ int main(){
     In C++, object composition involves using classes as member variables in other classes.
     This sample program demonstrates composition in action.
     It contains Person and Birthday classes and each Person will have Birthday object as its member.
+
+    Composition is used for objects that share a has-a relationship, as in "A Person has a Birthday.".
+
+    Now, we've defined our Birthday and Person classes, we can go to our main, create a Birthday object,
+    and then pass it to a Person object.
+
+    In general, composition serves to keep each individual class relatively simple, straightforward,
+    and focused on performing one task.
+    It also enables each sub-object to be self-contained, allowing for reusability (we can use the Birthday
+    class within various other classes.)
     */
+    cout << "39. Compositions" << endl;
+
+    Birthday birthday(2,21,1996);
+    Person person("Prashik", birthday);
+    person.printInfo();
+    // We've created a Birthday object for the date of 2/21/1996.
+    // We then created a Person object and passed the Birthday object to its constructor.
+    // We then used the Person object's printInfo() function to print its data.
+
+    cout << endl << endl;
+    /*
+    Prashik
+    2/21/1996
+    */
+
+
+    /*
+    FRIEND FUNCTIONS:
+    Normally, private members of a class cannot be accessed from outside of that class.
+    However, declaring a non-member function as a friend of a class allows it to access the 
+    class' private members.
+    This is accomplished by including a declaration of this external funciton within the class, and 
+    preceding it with the keyword friend.
+    In the example below, someFunc(), which is not a member funciton of the class, is a friend of MyClass
+    and can access its private members.
+
+    We can declare a function friend across any number of classes.
+    Similar to friend functions, we can define a friend class, which has access to the private members of another class.
+    */
+    cout << "40. Friend Functions" << endl;
+
+    // Create new object and call friend function.
+    MyClass obj;
+    someFunc(obj);
+    // someFunc() has the ability to modify the private member of the object and print its value.
+    // Typical use cases of friend functions are operations that are conducted between two different classes
+    // accessing private members of both.
+
+    cout << endl << endl; 
+
+
+
+    /*
+    THE THIS KEYWORD:
+    Every object in C++ has access to its own address through an important pointer called the this pointer.
+    Inside a member function this may be used to refer to the invoking object.
+
+    Friend functions do not have a this pointer, because friends are not members of a class.
+
+    We may be wondering why it's necessary to use the this keyword, when we have the option
+    to directly specifying the variable.
+
+    The this keyword has an important role in operator overloading.
+    */
+    cout << "41. The this keyword" << endl;
+
+    MyClass3 obj3(42);
+    obj3.printInfo();
+    // All three of the ways to access the member variable work.
+    // Only member functions have a this pointer.
+
+    cout << endl << endl;
+    /*
+    Outputs:
+    42
+    42
+    42
+    */
+
+
+
+    /*
+    OPERATOR OVERLOADING.
+    Most of the C++ built-in operators can be redefind or overloaded.
+    Thus, operators can be used with user-defined types as well (for e.g., allowing us to add two objects together.)
+
+    Operators that can't be overloaded are :: | .* | . | ?: [only 4]
+    All other operators can be overloaded.
+
+    Overloaded operators are functions, defined by the keyword operator followed by the symbol for the operator being defined.
+    An overloaded operator is similar to other functions in that it has a return type and a parameter list.
+
+    In our example, we will be overloading the + operator.
+    It will return an object of our class as its parameter.
+
+    With the overloaded operators, we can use any custom logic needed.
+    However, it's not possible to alter the operator's precedence, grouping, or number of operands.
+    */
+    cout << "42. Operator Overloading" << endl;
+
+    MyClass4 obj4(12), obj5(13);
+    MyClass4 res = obj4 + obj5;
+    cout << res.var << endl;
+
+    cout << endl << endl;
+    /*
+    Output:
+    25
+    */
+
+
 
     return 0;
 }
