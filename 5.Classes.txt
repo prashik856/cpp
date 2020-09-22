@@ -1,0 +1,8 @@
+It is generally a good practice to define our new classes in separate files.
+This makes maintaining and reading the code easier.
+
+We have two new files that have added in the project.
+The new files act as templates for our new class.
+
+MyClass.h is the header file
+MyClass.cpp is the source file.
