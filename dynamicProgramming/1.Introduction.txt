@@ -1,0 +1,20 @@
+Example problems:
+Calculate 40th fibonacci sequence
+Count the number of different ways to move through a 6x9 grid.
+Given a set of coins, how can we make 27 cents in the least number of coins
+Given a set of substrings, what the possible ways to construct the string 'potentpot'
+
+Visualization is very imp:
+
+Dynamic Programming will be covering these:
+Memoization
+Tabulation
+
+
+1. Solving fibonacci problem as a first example:
+> Write a function fib(n) that takes in number as an argument. The function should return the n-th number of Fibonacci sequence.
+
+
+1st and 2nd number is 1.
+Fib(n) = Fib(n-1) + Fib(n-2)
+

@@ -1,0 +1,9 @@
+Why is fibonacci running so much time?
+
+Start visualizing our recurting function as a tree:
+We can see that our tree is calling some numbers a lot of times.
+
+What is time complexity?
+O(2^n) : Every call to function is calling itself 2 times
+
+
