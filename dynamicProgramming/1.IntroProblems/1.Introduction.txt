@@ -18,3 +18,9 @@ Tabulation
 1st and 2nd number is 1.
 Fib(n) = Fib(n-1) + Fib(n-2)
 
+
+
+canSum -> Decision Problem
+howSum -> Combinatoric Problem
+bestSum -> Potimization Problem
+
