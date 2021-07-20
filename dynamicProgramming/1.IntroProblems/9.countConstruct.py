@@ -20,8 +20,12 @@ The parent should add up the values returned by their children
 countConstruct(purple, [purp, p, ur, le, purpl]) -> 2
 
 '''
+memo = {}
 
 def countConstruct(targetString, wordBank):
+	if targetString in memo:
+		return memo[targetString]
+
 	if targetString == '':
 		return 1
 	# iterate through all the words
@@ -50,7 +54,7 @@ def countConstruct(targetString, wordBank):
 			suffix = targetString[len(wordBank[i]):]
 			value = value + countConstruct(suffix, wordBank)
 
-	# memo[targetString] = False
+	memo[targetString] = value
 	return value
 
 
@@ -72,3 +76,16 @@ for i in range(t):
 	print(wordBank)
 	print(countConstruct(targetString, wordBank))
 	print()
+
+'''
+m = targetString.length
+n = wordBank.length
+Brute force
+time: O(n^m * m)
+Space: O(m*m)
+
+Memoized:
+time: O(n*m*m)
+Space: O(m*m)
+'''
+

@@ -78,7 +78,7 @@ for i in range(t):
 	print("Word Bank Lenght: " + wordBankLength)
 	wordBank = []
 	for j in range(int(wordBankLength)):
-		word = input()
+		word = str(input())
 		wordBank.append(word)
 	print("Word Bank: ")
 	print(wordBank)
