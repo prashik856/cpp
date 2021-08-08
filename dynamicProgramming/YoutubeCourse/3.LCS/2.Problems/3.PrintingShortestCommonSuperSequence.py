@@ -41,19 +41,19 @@ j = m
 while(i > 0 or j > 0):
     if i == 0 and j > 0:
         result = result + y[j-1]
-        print(result)
+        #print(result)
         j = j - 1
         continue
     
     if j == 0 and i > 0:
         result = result + x[i-1]
-        print(result)
+        #print(result)
         i = i - 1
         continue
         
     if(x[i-1] == y[j-1]):
         result = result + x[i-1]
-        print(result)
+        #print(result)
         i = i-1
         j = j-1
     else:
@@ -61,11 +61,11 @@ while(i > 0 or j > 0):
         value2 = table[i][j-1]
         if value1 > value2:
             result = result + x[i-1]
-            print(result)
+            #print(result)
             i = i - 1
         else:
             result = result + y[j-1]
-            print(result)
+            #print(result)
             j = j - 1
 print("Value of result is: ")
 print(result) 
