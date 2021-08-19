@@ -273,7 +273,7 @@ def solve(s, i, j, isTrue):
     return ans
 
 
-s = "T|F&T|F|T"
+s = "T|F&T|F|T&F&T|T^F^T|T&F&T^F"
 n = len(s)
 result = solve(s, 0, n-1, True)
 print("Value of result is: ")
