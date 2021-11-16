@@ -14,7 +14,7 @@ They know N orange zones, each of whose coordinates are given by (A[i][0], A[i][
 Problem Constraints
 2 <= B <= N <= 100
 
-0 <= A[i][0], A[i][1] <= 109
+0 <= A[i][0], A[i][1] <= 10^9
 
 
 
