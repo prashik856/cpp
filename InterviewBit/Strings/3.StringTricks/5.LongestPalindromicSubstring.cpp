@@ -34,6 +34,15 @@ Example Output
 Example Explanation
 We can see that longest palindromic substring is of length 7 and the string is "aaabaaa".
 */
+/*
+Rather than DP, our simple Idea worked.
+The idea is taken from here:
+https://www.geeksforgeeks.org/manachers-algorithm-linear-time-longest-palindromic-substring-part-1/?ref=rp
+
+We need to check Palindrome condition from each index.
+Either as current index as center (count = 1), or current index as not a center(count =0),
+and then we move out accordingly.
+*/
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -51,64 +60,98 @@ void print2DVector(vector< vector<int> > arr){
 string solve(string a){
     string result = "";
     int n = a.size();
-    string b;
-
-    // for backtracking
-    int tempResult = 0;
-    int maxValueRow = 0;
-    int maxValueColumn = 0;
     
-    vector< vector<int> > table(n + 1, vector<int>(n+1, -1));
-    for(int i=n; i>=0; i--){
-        table[i][0] = 0;
-        table[0][i] = 0;
-        if(i == n){
-            continue;
-        } else {
-            b.push_back(a[i]);
+    int startPosition = -1;
+    int endPosition = -1;
+    int maxSize = 0;
+    for(int i=0; i<a.size(); i++){
+
+        int j = i-1;
+        int k = i+1;
+        int count = 1;
+        // cout << "Center as " << i << endl;
+        // cout << "j: " << j << endl;
+        // cout << "k: " << k << endl;
+        // with center as i;
+        while(j >=0 && k<n){
+            // cout << "a[j]: " << a[j] << endl;
+            // cout << "a[k]: " << a[k] << endl;
+            if(a[j] == a[k]){
+                count++;
+                count++;
+            } else {
+                break;
+            }
+            j--;
+            k++;
+        }
+        // cout << "Count: " << count << endl;
+        if(count > maxSize){
+            maxSize = count;
+            startPosition = j;
+            endPosition = k;
+            // cout << "Max size: " << maxSize << endl;
+            // cout << "Start: " << startPosition << endl;
+            // cout << "End: " << endPosition << endl;
+        }
+
+        // with no center
+        j = i;
+        k = i+1;
+        count = 0;
+        // cout << "No Center" << endl;
+        // cout << "j: " << j << endl;
+        // cout << "k: " << k << endl;
+        while(j >=0 && k<n){
+            if(a[j] == a[k]){
+                count++;
+                count++;
+            } else {
+                break;
+            }
+            j--;
+            k++;
+        }
+        if(count > maxSize){
+            maxSize = count;
+            startPosition = j;
+            endPosition = k;
+            // cout << "Max size: " << maxSize << endl;
+            // cout << "Start: " << startPosition << endl;
+            // cout << "End: " << endPosition << endl;
+        }
+        // cout << endl;
+    }
+    if(maxSize == 1){
+        result.push_back(a[0]);
+        return result;
+    } else {
+        if(startPosition >= 0 && endPosition < n){
+            startPosition++;
+            endPosition--;
+        }
+        else if(startPosition < 0 && endPosition < n){
+            startPosition = 0;
+            endPosition--;
+        }
+        else if(startPosition >= 0 && endPosition >= n ){
+            startPosition++;
+            endPosition = n - 1;
+        }
+        else if(startPosition < 0 && endPosition >= n){
+            startPosition = 0;
+            endPosition = n-1;
+        }
+        for(int i=startPosition; i<=endPosition; i++){
+            result.push_back(a[i]);
         }
     }
-    // cout << "Initial table is: " << endl;
-    // print2DVector(table);
-    // cout << "Reversed string is: " << endl;
-    // cout << b << endl;
-
-    // Simple Longest Common Substring code
-    for(int i=1; i<=n; i++){
-        for(int j=1; j<=n; j++){
-
-            if(a[i-1] == b[j-1]){
-                table[i][j] = 1 + table[i-1][j-1];
-            }
-            else{
-                table[i][j] = 0;
-            }
-            
-            if(table[i][j] > tempResult){
-                tempResult = table[i][j];
-                maxValueRow = i;
-                maxValueColumn = j;
-            }
-
-        }
-    }
-
-    print2DVector(table);
-    cout << "Longest Common substring length is: " << tempResult << endl;
-    cout << "Row: " << maxValueRow << " | Column: " << maxValueColumn << endl; 
-
-    // Backtrack
-    int i=maxValueRow, j=maxValueColumn;
-    while(i>0 && j>0){
-        result.push_back(a[i-1]);
-        i--;j--;
-    }
-
     return result;
 }
 
 int main(){
-    string a = "abacdfgdcaba";
+    string a = "bccbcbcacbab";
+    cout << "Given input string is: " << a << endl;
     string result = solve(a);
     cout << "Result is: " << result << endl;
     return 0;
