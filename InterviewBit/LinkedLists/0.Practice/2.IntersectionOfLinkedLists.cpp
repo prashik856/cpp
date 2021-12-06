@@ -25,6 +25,7 @@ Complete code in the hints section.
 
 /*
 Solution Approach:
+https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/
 Method 1(Simply use two loops) 
 Use 2 nested for loops. 
 The outer loop will be for each node of the 1st list and inner loop will be for 2nd list. 
