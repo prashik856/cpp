@@ -11,6 +11,12 @@ For example,
 
 Given {1,2,3,4}, reorder it to {1,4,2,3}.
 */
+/*
+We use a vector.
+First we store the whole list.
+We use a low and high index.
+while low <= high, we alternatively use low and high index in the new linked list.
+*/
 #include<bits/stdc++.h>
 using namespace std;
 
