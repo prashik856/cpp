@@ -1,63 +1,40 @@
 /*
-Problem Description
+Given a string A denoting an expression. It contains the following operators ’+’, ‘-‘, ‘*’, ‘/’.
 
-Given a string A consisting only of '(' and ')'.
+Chech whether A has redundant braces or not.
 
-You need to find whether parantheses in A is balanced or not ,if it is balanced then return 1 else return 0.
+Return 1 if A has redundant braces, else return 0.
 
+Note: A will be always a valid expression.
 
-
-Problem Constraints
-1 <= |A| <= 105
 
 
 
 Input Format
-First argument is an string A.
 
-
-
+The only argument given is string A.
 Output Format
-Return 1 if parantheses in string are balanced else return 0.
 
+Return 1 if string has redundant braces, else return 0.
+For Example
 
-
-Example Input
 Input 1:
-
- A = "(()())"
-Input 2:
-
- A = "(()"
-
-
-Example Output
+    A = "((a + b))"
 Output 1:
+    1
+    Explanation 1:
+        ((a + b)) has redundant braces so answer will be 1.
 
- 1
+Input 2:
+    A = "(a + (a + b))"
 Output 2:
-
- 0
-
-
-Example Explanation
-Explanation 1:
-
- Given string is balanced so we return 1
-Explanation 2:
-
- Given string is not balanced so we return 0
+    0
+    Explanation 2:
+        (a + (a + b)) doesn't have have any redundant braces so answer will be 0.
 */
-
 /*
-we just learned this from the DS and Algo course
 Solution Approach:
-when '(' just push in stack
-When ) 
-    -> if stack empty or top != ( => return 0
-    -> else pop stack
-At the end, if stack is not empty, return 0
-else return 1
+
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -131,48 +108,8 @@ int getLinkedListLength(ListNode *head){
     return count;
 }
 
-int solve(string a){
-    int result = 1;
-
-    stack<int> st;
-    for(int i=0; i<a.size(); i++){
-        char val = a[i];
-        if(val == '('){
-            st.push(val);
-        }
-        else {
-            // we have ) but stack is empty
-            if(st.empty()){
-                return 0;
-            }
-
-            // top is not equal to (
-            char top = st.top();
-            if(top != '('){
-                return 0;
-            }
-
-            // top is equal to (
-            st.pop();
-        }
-    }
-
-    // our stack should be empty
-    if(!st.empty()){
-        return 0;
-    }
-
-    // All good
-    return result;
-}
-
 int main(){
-    string a = "(()";
-    cout << "Given input is: " << endl;
-    cout << a << endl;
-
-    int result = solve(a);
-    cout << "Result: " << result << endl;
+    vector<int> a = {1,2,3,4,5};
     return 0;
 }
 
