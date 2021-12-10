@@ -1,0 +1,44 @@
+What is Backtracking?
+> Backtracking is an algorithmic technique that considers searching in every possible combination
+ for solving a computational problem.
+> It is known for solving problems recursively one step at a time and removing those 
+solutions that that do not satisfy the problem constraints at any point of time.
+> It is a refined brute force approach that tries out all the possible solutions and chooses 
+the best possible ones out of them.
+> The backtracking approach is generally used in the cases where there are possibilities 
+of multiple solutions.
+
+The term backtracking implies - if the current solution is not suitable, 
+then eliminate that and backtrack (go back) and check for other solutions.
+
+
+Backtracking - How it works?
+In any backtracking problems, the algorithm tries to find a path to the feasible 
+solution which has some intermediary checkpoints. 
+In case they don’t lead to the feasible solution, the problem can backtrack from 
+the checkpoints and take another path in search of the solution. Consider the below example:
+
+
+Here S is the starting point of the problem. 
+We start from S, we go to find solution S1 via the intermediate point I1. 
+But we find that the solution S1 is not a feasible solution to our problem. 
+Hence, we backtrack (go back) from S1, go back to I1, go back to S and 
+then check for the feasible solution S2. 
+This process happens till we arrive at a feasible solution.
+
+Here, S1 and S2 are not the feasible solutions. 
+Only S3 is a feasible solution as per our example. 
+When we look at this example, we can see that we traverse through all possible combinations, 
+till we arrive at the feasible solution. 
+This is why, we say that backtracking is a brute-force algorithmic technique.
+
+The above tree representation of a problem is called as a “space state tree”. 
+It represents all possible states (solution or non-solution) of that given problem.
+
+The final algorithm can be summarised as:
+Step 1 − if current point is a feasible solution, return success
+Step 2 − else if all paths are exhausted (i.e current point is an end point), 
+return failure, since we have no feasible solution.
+Step 3 − else if current point is not an end point, backtrack and explore other points and 
+repeat above steps.
+

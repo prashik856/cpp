@@ -1,0 +1,71 @@
+Graph Coloring Algorithm Using Backtracking
+
+What is graph coloring problem?
+Graph coloring problem involves assigning colors to certain elements of a graph subject 
+to certain restrictions and constraints. 
+This has found applications in numerous fields in computer science. For example:
+
+Sudoku: 
+This game is a variation of Graph coloring problem where every cell denotes a node (or vertex) 
+and there exists an edge between two nodes if the nodes are in same row or same column or same block.
+Geographical maps: 
+There can be cases when no two adjacent cities/states can be assigned same color in the maps of 
+countries or states. 
+In this case, only four colors would be sufficient to color any map.
+
+
+Vertex coloring is the most commonly encountered graph coloring problem. 
+The problem states that given m colors, 
+determine a way of coloring the vertices of a graph such that no two adjacent vertices 
+are assigned same color.
+
+Note: The smallest number of colors needed to color a graph G is called its chromatic number.
+For example, the following undirected graph can be colored using minimum of 2 colors.
+Hence the chromatic number of the graph is 2. 
+
+
+Analysis:
+Input:
+A graph represented in 2D array format of size V * V where V is the 
+number of vertices in graph and the 2D array is the adjacency matrix representation and 
+value graph[i][j] is 1 if there is a direct edge from i to j, otherwise the value is 0.
+An integer m that denotes the maximum number of colors which can be used in graph coloring.
+Consider the input as shown in the image below:
+The above graph can be represented as follows:
+graph[4][4] = {
+            { 0, 1, 1, 1 },
+            { 1, 0, 1, 0 },
+            { 1, 1, 0, 1 },
+            { 1, 0, 1, 0 },
+        };
+Consider m = 3.
+
+Output:
+Return array color of size V that has numbers from 1 to m. 
+Note that color[i] represents the color assigned to the ith vertex.
+Return false if the graph cannot be colored with m colors.
+
+Solution:
+Naive Approach:
+The brute force approach would be to generate all possible combinations (or configurations) of colors.
+After generating a configuration, check if the adjacent vertices have the same colour or not. 
+If the conditions are met, add the combination to the result and break the loop.
+Since each node can be colored by using any of the m colors, the total number of possible 
+color configurations are mV. 
+The complexity is exponential which is very huge.
+
+
+Using Backtracking:
+By using the backtracking method, the main idea is to assign colors one by one to 
+different vertices right from the first vertex (vertex 0).
+Before color assignment, check if the adjacent vertices have same or different color 
+by considering already assigned colors to the adjacent vertices.
+If the color assignment does not violate any constraints, 
+then we mark that color as part of the result. 
+If color assignment is not possible then backtrack and return false.
+
+Time Complexity: O(mV). Since backtracking is also a kind of brute force approach, 
+there would be total O(mV) possible color combinations. 
+It is to be noted that the upperbound time complexity remains the same but the 
+average time taken will be less due to the refined approach.
+Space Complexity: O(V) for storing the output array in O(V) space

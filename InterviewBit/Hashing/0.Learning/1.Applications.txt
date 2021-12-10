@@ -1,0 +1,175 @@
+What is the need for hashing?
+Consider a scenario where you want to design a system for storing records of employees 
+of your organization keyed using their employee IDs. 
+We need this system primarily to do the following 3 tasks:
+> Insert a employee ID along with corresponding employee data.
+> Search based on employee ID and fetch that employee’s details.
+> Delete a employee data based on the employee ID entered.
+
+What are the data structures that we can think of for performing the above 
+functionalities for our system efficiently? 
+Well, let’s analyze about implementing this system using the known data structures:
+1. Arrays / Linked Lists of employee ID and data:
+> If we implement the search functionality in linear fashion, 
+it can be costly to us when we have huge number of records to be searched upon.
+> If we make sure that the arrays are maintained in sorted manner based on the employee ID, 
+then using Binary Search, 
+we can search for employee ID O(Logn) time. 
+But this will have an impact on insert and delete functionalities because we need to 
+maintain sorted order of arrays upon every insert and deleting of records. 
+Hence this data structure is not feasible to use.
+
+2. Balanced binary search tree (BBST) taking employee ID as keys:
+A BBST is a binary tree in which the left and right subtrees of every node always 
+differs in height by no more than 1.
+Here, due to the nature of BBST data structure, we can guarantee that the search, 
+insert and delete functionalities can take place in O(Logn) time. 
+But, is there any more efficient way? Let’s look for other options.
+
+3. Direct Access Table (DAT):
+This data structure uses the O(1) retrieval time complexity property 
+of Arrays to its advantage. Lets see how below.
+In DAT, we make a very large array and use employee ID as index for the array.
+We treat a value in array as null if employee ID is not present, 
+else the value stores pointer to data mapping to the employee ID.
+Here, we can do all the operations - 
+Search, Insert and Delete in O(1) time which is the best possible we can achieve.
+
+But, this has many limitations.
+The obvious major problem is we need to have a large space dedicated for this data structure. 
+The space complexity would be huge.
+Another problem is if we have employee ID purely as an integer of n digits, 
+then a programming language cannot support to store its value as integer as the value 
+increases (as the number of records increase after a particular limit).
+
+
+
+Applications
+Hashing has found applications in lots of fields due to its property of irreversibility 
+and constant time access. Following are the applications of hashing:
+1.Password Security and Verification
+Due to property of “one-way” or “irreversible” hash function, 
+the world has seen a rise in cryptographic hash functions which provides 
+the hash value in encrypted format.
+Security: 
+Whenever we are using any website for the first time which requires our 
+authentication using “Sign Up” wherein we enter our credentials to access 
+the accounts that belongs to us, we need to be assured that our account does not fall into wrong hands. 
+Hence, the password entered is stored in the database in the form of a hash. 
+This is done to avoid our crucial data falling into wrong hands. 
+
+Verification: 
+When we try to login to the website from next time onwards, 
+the password hash is computed and sent to the server for verifying whether that password belongs to us. 
+The hash value is sent so that whenever a data is sent from client to server there is no case
+ of sniffing. 
+
+2.Tokenization: 
+The same above concept explained in “Password Security and Verification” can be extended to 
+tokenization for storing the authorization tokens of users already logged into the systems.
+
+3.Data Structures: 
+Hashing is commonly used in defining and developing data structures of programming languages. 
+For example: HashMap in Java, unordered_map in C++ etc.
+
+4. Compiler Development 
+The compilers corresponding to programming languages save all the keywords 
+(such as if, else, for, while, return etc) that are used by that language in the form of hash table 
+so that the compiler can easily identify what keywords and identified are needed to be 
+compiled during compilation process.
+
+
+5. Message Digests: 
+This is again an application of cryptographic hashes.
+> Consider a scenario where you use cloud services to store your files and data. 
+Now you need to be assured that the third party cloud service providers dont tamper with your files. 
+We do so by computing hash of that file/data using a cryptographic hashing algorithms. 
+We store these computed hashes in our local machines for reference.
+> Next time whenever we download the files from cloud storages, 
+we can directly compute the hash of the files. 
+We match it with the locally stored hash that was previously computed.
+> If the file has been tampered by the service providers, the hash value of the file 
+would definitely change. 
+If it hasnt been tampered then the hash values of the downloaded file and the locally saved 
+value would be exactly same. 
+> Most common cryptographic algorithm is SHA256. 
+These are also called as digest algorithms. 
+The files in the above example is considered to be a message.
+
+
+Others:
+Hashing is also used in various common algorithms like Rabin Karp algorithm, 
+counting frequency of characters in a word, creating git commit codes by git tool, caching etc.
+Apart from above mentioned applications, hashing is also commonly used in Blockchain, 
+Machine learning for feature hashing, storing objects or files in AWS S3 Buckets, 
+Indexing on Database for faster retrieval and many others!
+
+
+FAQS:
+Are Hashing algorithms secure?
+We have a separate branch of hashing algorithms that provide security and they are called as 
+Secure Hashing Algorithms (SHAs). 
+These are also called as cryptographic hashing algorithms which are widely used in computer and 
+cloud systems for providing security to any resource.
+The most secure hashing algorithm available is SHA256.
+
+Who invented Hashing?
+Hashing was first invented by Hans Peter Luhn in the 1940s.
+He demonstrated his work on hashing at a six-day international conference devoted to 
+scientific information which was scheduled in November 1958.
+
+How does Hashing work?
+Hashing mainly works by mapping data of any arbitrary size to fixed-size value with the 
+help of a function called “hash function” and storing it in a data structure called “hash table” 
+at the value returned by hash functions. 
+The values returned by this function are called hash codes, digests, hash values or hashes.
+
+How is hashing implemented in Java?
+Java has provided inbuilt classes for the purpose of implementing hashing and they are as follows:
+
+HashTable<Object, Object> : 
+This is a synchronised (very useful in multi-threaded environments) implementation of hashing.
+
+HashMap<Object, Object> : 
+This is a non - synchronised (doesnt work in multi-threaded environments) and 
+faster implementation of hashing. 
+Here, the order of insertion of keys are not maintained.
+
+LinkedHashMap<Object, Object>: 
+Works similar to HashMap but here the order of insertion of keys are maintained.
+
+ConcurrentHashMap<Object, Object>: 
+This class works similar to HashTable class. 
+This is synchronized, meaning it will work great with multi-threaded environments and 
+this class is faster than HashTable as it supports efficient means of handling multiple 
+locks on the resource.
+
+HashSet<Object>: 
+This works similar to HashMap class but here only the keys are maintained. 
+Doesn’t support duplicate objects. Here, Order of insertion of keys is not maintained.
+
+LinkedHashSet<Object> 
+This is similar to LinkedHashMap. 
+The class just supports the keys. 
+Order of insertion of keys are maintained.
+
+
+Why the results of hashing cannot be reverted back to original input?
+Hashing was developed by keeping in mind of the security of any systems. 
+Hence, for a good hash function, it is always important for the function to be “one-way” so 
+that the hackers do not get easy access to the critical data.
+
+
+When is it not advisable to use Hashing/ Hash Tables?
+In general, hashing has excellent time complexity for Insert/ Search / Delete operations.
+For smaller application, it is advisable to use arrays because hash table consumes more memory space.
+Hash tables do not support some operations like iterating over the entries 
+where the keys are within a defined range, finding the entry with the largest/smallest key and so on. 
+In such cases, it is better to go with arrays.
+
+
+Where is Hashing used?
+Hashing is most widely used across many applications such as password security, 
+password verification, tokenization, data structures and compilers of programming languages,
+ blockchain, machine learning feature hashing and many more!
+

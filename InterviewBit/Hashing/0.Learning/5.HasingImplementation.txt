@@ -1,0 +1,19 @@
+ C++ has unordered_map which is implemented via hashing. We will discuss treemaps in C++ as well later, which in practice seem to behave faster in C++.
+
+Declaration
+    unordered_map<int, int> A; // declares an empty map. O(1)
+
+Adding an key, value pair :
+    A.insert({key, value}); // O(1) time on average
+
+Find the value for key = K:
+    if (A.find(K) == A.end()) return null; //  means that K does not exist in A. 
+    else return A[K];    // O(1) average case. Rare worst case O(n). 
+
+Size ( number of elements ) of the vector :
+    A.size()  // O(1)
+
+Erase from the map :
+    if (A.find(K) != A.end()) A.erase(A.find(K));
+     OR A.erase(K);
+
