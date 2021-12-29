@@ -1,0 +1,70 @@
+Heap And Map Implementation Details
+
+C++ :
+ C++ Standard Template Library provides maps and sets which are implemented > 
+ internally using balanced red black trees. 
+ We explore maps here for now, although set is very much similar. 
+Map declaration :
+    map<int, int> A; // O(1) declaration which declares an empty tree map.
+Insert a new key, value pair K, V:
+    A[K] = V; // O(log n). Note that we expect key K to be unique here. If you have keys that will repeat, take a look at multimaps. 
+Delete a key K:
+    A.erase(K); // O(log n)
+Search if a key K exists in map:
+    A.find(K) != A.end()  // O(log n)
+Search for the value with key K:
+     A[K]     // O(log n)
+Find minimum key K in the map ( if the map is not empty ) :
+    (A.begin())->first     // O(1)
+Find maximum key K in the map ( if map is not empty ) :
+    (A.rbegin())->first     // O(1)
+Iterate over keys in sorted order :
+    for (map<int,int>::iterator it = A.begin(); it != A.end(); ++it) {
+        // it->first has the key, it->second has the value. 
+    }
+Find closest key K > x :
+    (A.upper_bound(x))->first     // O(log n). Do need to handle the case when x is more than or equal to the max key in the map. 
+Find closest key K >= x :
+    (A.lower_bound(x))->first     // O(log n). Do need to handle the case when x is more than the max key in the map.
+Size ( number of entries in the map ) :
+    A.size()
+JAVA
+ Java has TreeMap which is very similar to C++ map. Also implemented using Red Black trees. 
+Map declaration :
+    TreeMap<Integer, Integer> A = new TreeMap<Integer, Integer>(); // O(1) declaration which declares an empty tree map.
+Insert a new key, value pair K, V:
+    A.put(K, V); // Note that we expect key K to be unique here. If you have keys that will repeat, they will be replaced. 
+             // O(log n)
+Delete a key K:
+    A.remove(K); // O(log n)
+Search if a key K exists in map:
+    A.containsKey(K)  // O(log n)
+Search for the value with key K:
+     A.get(K)     // O(log n)
+Find minimum key K in the map ( if the map is not empty ) :
+    A.firstKey() OR A.firstEntry().getKey()     // O(1)
+Find maximum key K in the map ( if map is not empty ) :
+    A.lastKey() OR A.lastEntry().getKey()     // O(1)
+Iterate over keys in sorted order :
+    for (Map.Entry<Integer, Integer> entry : A.entrySet()) {
+        // entry.getKey() has the key, entry.getValue() has the value
+    } 
+Find closest key K >= x :
+    A.ceilingEntry(x).getKey()     // O(log n). Do need to handle the case when x is more than the max key in the map.
+Find closest key K <= x :
+    A.floorEntry(x).getKey()     // O(log n). Do need to handle the case when x is smaller than min key in the map
+Size ( number of entries in the map ) :
+    A.size() 
+PYTHON :
+ Python does not have a implementation of treemap in standard library ( Sorry python users ). The closes we come to it is with heapq which is implementation of heaps ( http://en.wikipedia.org/wiki/Heap_%28data_structure%29 ) which obviously means that we are restricted in terms of number of things we can do as compared to treemap. 
+Heap declaration :
+    A = []; # declares an empty list / heap. O(1)
+            # Note that heaps are internally implemented using lists for which heap[k] <= heap[2*k+1] and heap[k] <= heap[2*k+2] for all k. 
+Insert a new key, value pair K, V:
+    heapq.heappush(A, (K, V));     // O(log n)
+Delete the smallest key K ( Note that deleting random key K will be inefficient ) :
+    heapq.heappop(A)[0]
+Find minimum key K in the map ( if the map is not empty ) :
+    A[0][0]
+Size ( number of entries in the map ) :
+    len(A) 

@@ -1,0 +1,365 @@
+Heap Sort Algorithm
+Heap sort can be understood as the improved version of the binary search tree. It does not create a node as in case of binary search tree instead it builds the heap by adjusting the position of elements within the array itself.
+
+In which method a tree structure called heap is used where a heap is a type of binary tree. An ordered balanced binary tree is called a Min-heap, where the value at the root of any subtree is less than or equal to the value of either of its children.
+
+An ordered balanced binary tree is called a max heap where the value at the root of any subtree is more than or equal to the value of either of its children.
+
+It is not necessary that the two children must be in some order. sometimes the value in the left child may be more than the value at the right child and some other time it may be the other way round.
+
+Let us understand what a heap is:
+
+A heap is a tree data structure that satisfies the following properties:
+
+Shape property: Heap is always a complete binary tree which means that all the levels of a tree are fully filled. There should not be a node which has only one child. Every node except leaves should have two children then only a heap is called as a complete binary tree.
+Heap property: All nodes are either greater than or equal to or less than or equal to each of its children. This means if the parent node is greater than the child node it is called as a max heap. Whereas if the parent node is lesser than the child node it is called as a min heap.
+Working of heapsort
+Basically, there are two phases involved in the sorting of elements using heap sort algorithm they are as follows:
+
+First, start with the construction of a heap by adjusting the array elements.
+Once the heap is created repeatedly eliminate the root element of the heap by shifting it to the end of the array and then store the heap structure with remaining elements.
+Let us try to understand this in more detail.
+
+Suppose an array consists of N distinct elements in memory, then the heap sort algorithm works as follows:
+
+To begin with, a heap is built by moving the elements to its proper position within the array. This means that as the elements are traversed from the array the root, its left child, its right child are filled in respectively forming a binary tree.
+In the second phase, the root element is eliminated from the heap by moving it to the end of the array.
+The balance elements may not be a heap. So again steps 1 and 2 are repeated for the balance elements. The procedure is continued until all the elements are eliminated.
+When eliminating an element from the heap we need to decrement the maximum index value of the array by one. The elements are eliminated in decreasing order for a max-heap and in increasing order for min-heap.
+
+Consider the following example:
+
+Suppose the array that is to be sorted contains the following elements: 11, 2, 9, 13, 57, 25, 17, 1, 90, 3.
+
+The first step now is to create a heap from the array elements. For this consider a binary tree that can be built from the array elements the zeroth element would be the root element and the left and right child of any element would be valued at i, 2*i+1, and 2*i + 2th index respectively.
+
+
+
+ 
+
+11
+
+2
+
+9
+
+13
+
+57
+
+25
+
+17
+
+1
+
+90
+
+3
+
+ 
+
+The above diagram depicts the binary tree version of the array.
+
+We build the heap from the above binary tree and is shown below:
+
+heap sort tree
+
+90
+
+57
+
+25
+
+13
+
+11
+
+9
+
+17
+
+1
+
+2
+
+3
+
+ 
+
+Now the root 90 is moved to the last location by exchanging it with 3. Finally, 90 is eliminated from the heap by reducing the maximum index value of the array by 1. The balance elements are then rearranged into the heap. The heap and array look like as shown in the below diagram:
+
+Heap Sort step by step
+
+ 
+
+57
+
+13
+
+25
+
+3
+
+11
+
+9
+
+17
+
+1
+
+2
+
+90
+
+Similarly when the current root 57 is exchanged with 2, and eliminated from the heap by reducing the maximum index value of the array by 1. The balance elements are then rearranged into the heap. The heap and array look like as shown in the below diagram:
+
+
+
+ 
+
+17
+
+13
+
+9
+
+3
+
+11
+
+1
+
+2
+
+25
+
+57
+
+90
+
+ 
+
+Following the same approach, the following phases are followed until the fully sorted array is achieved.
+
+
+
+ 
+
+ 
+
+13
+
+11
+
+9
+
+3
+
+2
+
+1
+
+17
+
+25
+
+57
+
+90
+
+ 
+
+
+
+ 
+
+11
+
+3
+
+9
+
+1
+
+2
+
+13
+
+17
+
+25
+
+57
+
+90
+
+ 
+
+
+
+ 
+
+9
+
+3
+
+2
+
+1
+
+11
+
+13
+
+17
+
+25
+
+57
+
+90
+
+ 
+
+
+
+ 
+
+3
+
+1
+
+2
+
+9
+
+11
+
+13
+
+17
+
+25
+
+57
+
+90
+
+ 
+
+
+
+ 
+
+2
+
+1
+
+3
+
+9
+
+11
+
+13
+
+17
+
+25
+
+57
+
+90
+
+ 
+
+
+
+ 
+
+1
+
+2
+
+3
+
+9
+
+11
+
+13
+
+17
+
+25
+
+57
+
+90
+
+ 
+
+The array above depicts the fully sorted array using the heap, thus called a heap sort.
+
+Implementation:
+Following are C, C++, Java and Python implementations of Heap Sort.
+
+C
+C++
+Java
+Python
+Implementation of heap sort in C:
+
+#include <stdio.h>
+int main()
+{
+   int heap[10], array_size, i, j, c, root, temporary;
+   printf("\n Enter size of array to be sorted :");
+   scanf("%d", &array_size);
+   printf("\n Enter the elements of array : ");
+   for (i = 0; i < array_size; i++)
+      scanf("%d", &heap[i]);
+   for (i = 1; i < array_size; i++)
+   {
+       c = i;
+       do
+       {
+           root = (c - 1) / 2;            
+           if (heap[root] < heap[c])   /* to create MAX heap array */
+           {                                  // if child is greater than parent swap them
+               temporary = heap[root];      // as structure is of complete binary tree
+               heap[root] = heap[c];     // it took logn steps to reach from root to leaf
+               heap[c] = temporary;
+           }
+           c = root;
+       } while (c != 0);
+   }
+   printf("Heap array : ");
+   for (i = 0; i < array_size; i++)
+       printf("%d\t ", heap[i]);         //printing the heap array
+   for (j = array_size - 1; j >= 0; j--)
+   {
+       temporary = heap[0];
+       heap[0] = heap[j] ;   /* swap max element with rightmost leaf element */
+       heap[j] = temporary;
+       root = 0;
+       do
+       {
+           c = 2 * root + 1;    /* left node of root element */
+           if ((heap[c] < heap[c + 1]) && c < j-1)
+               c++;
+           if (heap[root]<heap[c] && c<j)    /* again rearrange to max heap array */
+           {
+               temporary = heap[root];
+               heap[root] = heap[c];
+               heap[c] = temporary;
+           }
+           root = c;
+       } while (c < j);
+   }
+   printf("\n The sorted array is : ");
+   for (i = 0; i < array_size; i++)
+      printf("\t %d", heap[i]);
+}

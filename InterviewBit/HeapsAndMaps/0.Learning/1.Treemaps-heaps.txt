@@ -1,0 +1,22 @@
+Why Treemaps / Heaps
+In the trees topic, we explore what trees are.
+
+We also explore that in a balanced BST, we can do the following :
+        1. Insert in O(log n)
+        2. Delete in O(log n)
+        3. Search for an element in O(log n)
+        4. Find Min in O(log n)
+        5. Find Max in O(log n)
+        6. Get all the elements in sorted order in O(n) - Inorder traversal.
+        7. Find an element closest in value to x O(log n)
+
+We also explored hashing in a previous topic along with hashmaps.
+
+While hashmaps are really good for tracking whether an element is present or not, 
+or the number of occurrences, it fails to answer :
+        1. the min / max query in reasonable time
+        2. Iterating through the element in sorted order in linear time
+        3. Find an element closes to x in logarithmic time.
+With that in mind, we explore treemap which helps us address all of those queries.
+Treemaps are implemented internally using balanced trees 
+( They mostly use red black trees, but going into the implementation details of red black tree might be out of scope here ).
