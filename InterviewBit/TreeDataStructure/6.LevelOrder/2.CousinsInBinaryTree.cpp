@@ -85,6 +85,7 @@ Explanation 2:
 Solution Approach:
 Normal bfs, parent and child. Check if value exists, catch it's sibling. 
 And then put all values except sibing and current value in result.
+break the loop.
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -276,9 +277,54 @@ vector<int> solve(TreeNode *root, int b){
     queue<TreeNode *> parent;
     queue<TreeNode *> child;
     parent.push(root);
+    bool foundNode = false;
+
     while(!parent.empty()){
-        TreeNode *val = parent.front();
+
+        while(!parent.empty()){
+            TreeNode *val = parent.front();
+            parent.pop();
+            if(val -> left != 0 && !foundNode){
+                if(val -> left -> val == b){
+                    // cout << "Found Node." << endl;
+                    foundNode = true;
+                    continue;
+                }
+            }
+            if(val -> right != 0 && !foundNode){
+                if(val -> right -> val == b){
+                    // cout << "Found Node." << endl;
+                    foundNode = true;
+                    continue;
+                }
+            }
+
+            if(foundNode || !foundNode){
+                if(val -> left != 0){
+                    child.push(val -> left);
+                }
+                if(val -> right != 0){
+                    child.push(val -> right);
+                }
+            }
+        }
+
+        if(foundNode){
+            break;
+        }
         
+        while(!child.empty()){
+            TreeNode *tempNode = child.front();
+            parent.push(tempNode);
+            child.pop();
+        }
+
+    }
+
+    while(!child.empty()){
+        TreeNode *front = child.front();
+        child.pop();
+        result.push_back(front -> val);
     }
 
     return result;
@@ -294,6 +340,8 @@ int main(){
     cout << "Given tree node to search for: " << b << endl;
 
     vector<int> result = solve(root, b);
+    cout << "Result: " << endl;
+    printVector(result);
     return 0;
 }
 
