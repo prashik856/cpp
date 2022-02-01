@@ -1,86 +1,34 @@
 /*
-Problem Description
+Implement pow(A, B) % C.
 
-Given a binary tree denoted by root node A and a leaf node B from this tree.
+In other words, given A, B and C, 
 
- It is known that all nodes connected to a given node (left child, right child and parent) get burned in 1 second. Then all the nodes which are connected through one intermediate get burned in 2 seconds, and so on.
+find (AB)%C.
 
-You need to find the minimum time required to burn the complete binary tree.
+Input : A = 2, B = 3, C = 3
+Return : 2 
+2^3 % 3 = 8 % 3 = 2
+PROBLEM APPROACH :
 
-
-
-Problem Constraints
-2 <= number of nodes <= 105
-
-1 <= node value, B <= 105
-
-node value will be distinct
-
-
-
-Input Format
-First argument is a root node of the binary tree, A.
-
-Second argument is an integer B denoting the node value of leaf node.
-
-
-
-Output Format
-Return an integer denoting the minimum time required to burn the complete binary tree.
-
-
-
-Example Input
-Input 1:
-
- Tree :      1 
-            / \ 
-           2   3 
-          /   / \
-         4   5   6
- B = 4
-Input 2:
-
- Tree :      1
-            / \
-           2   3
-          /     \
-         4       5 
- B = 5 
-
-
-Example Output
-Output 1:
-
- 4
-Output 2:
-
- 4
-
-
-Example Explanation
-Explanation 1:
-
- After 1 sec: Node 4 and 2 will be burnt. 
- After 2 sec: Node 4, 2, 1 will be burnt.
- After 3 sec: Node 4, 2, 1, 3 will be burnt.
- After 4 sec: Node 4, 2, 1, 3, 5, 6(whole tree) will be burnt.
- 
-Explanation 2:
-
- After 1 sec: Node 5 and 3 will be burnt. 
- After 2 sec: Node 5, 3, 1 will be burnt.
- After 3 sec: Node 5, 3, 1, 2 will be burnt.
- After 4 sec: Node 5, 3, 1, 2, 4(whole tree) will be burnt.
+Complete solution in the hint.
 */
 /*
-Solution Approach:
-The minimum time required will be equal to height of the tree observed from the given node.
+Solution approach:
+https://stackoverflow.com/questions/11720656/modulo-operation-with-negative-numbers
+https://www.geeksforgeeks.org/write-a-c-program-to-calculate-powxn/
 
-This should have worked, but it is not working. 
-Fuck IB.
-
-Fucker worked properly when I used map. Man, better to use mapping in these places.
+We need to implement a mod function for negavtive numbers:
+mod(int a, int b){
+    int r = a % b;
+    if(r > 0){
+        return r;
+    } else {
+        return r + b;
+    }
+}
+Negative numbers do not behave the same as positive numbers. Take care of them.
+BTW
+(a * b * c) % d = (a % d) * (b % d) * (c % d)
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -266,68 +214,50 @@ void dfs(TreeNode *root){
     }
 }
 
-void customPreOrder(TreeNode *root, unordered_map<int, vector<int> > &adj){
-    if(root == 0){
-        return;
-    }
 
-    int currentValue = root -> val;
-    if( root -> left != 0){
-        adj[currentValue].push_back(root -> left -> val);
-        adj[root -> left -> val].push_back(currentValue);
-        customPreOrder(root -> left, adj);
-    }
-    if( root -> right != 0){
-        adj[currentValue].push_back(root -> right -> val);
-        adj[root -> right -> val].push_back(currentValue);
-        customPreOrder(root -> right, adj);
+long long mod(long long a, long long b){
+    long long r = a % b;
+    if(r >= 0){
+        return r;
+    } else {
+        return r + b;
     }
 }
 
-int solve(TreeNode *root, int b){
-    int result = 0;
-    unordered_map<int, int> visited;
-    unordered_map<int, vector<int> > adj;
-    customPreOrder(root, adj);
-    queue<int> parent;
-    queue<int> child;
-    parent.push(b);
-    while(!parent.empty()){
 
-        while(!parent.empty()){
-            int node = parent.front();
-            parent.pop();
-            visited[node] = 1;
-            vector<int> neighbours = adj[node];
-            for(int i=0; i<neighbours.size(); i++){
-                int currentNeighbour = neighbours[i];
-                if(visited[currentNeighbour] == 0){
-                    child.push(currentNeighbour);
-                }
-            }
-        }
-
-        while(!child.empty()){
-            int front = child.front();
-            child.pop();
-            parent.push(front);
-        }
-        result++;
+long long getPower(long long a, long long b, long long c){
+    if(b == 0){
+        return 1;
     }
+    long long temp = getPower(a, b/2, c);
+    temp = mod(temp, c);
+    long long val = (temp * temp);
+    val = mod(val, c);
+    if(b % 2 == 0){
+        return val;
+    } else {
+        val = (a * val);
+        val = mod(val, c);
+        return val;
+    }
+}
 
-    return result - 1;
+int solve(int a, int b, int c){
+    int result = 0;
+
+    long long tempResult = getPower(a, b, c);
+    tempResult = mod(tempResult, (long long) c);
+    result = tempResult;
+
+    return result;
 }
 
 int main(){
-    int rootNode = 3;
-    vector<int> a = {1,2,4,5};
-    TreeNode *root = createTree(rootNode, a);
-    cout << "Given Tree is:" << endl;
-    inOrder(root); cout << endl;
+    int a = -1;
     int b = 1;
-    cout << "Node to start from is: " << b << endl;
-    
-    int result = solve(root, b);
+    int c = 20;
+
+    int result = solve(a, b, c);
     cout << "Result: " << result << endl;
     return 0;
 }

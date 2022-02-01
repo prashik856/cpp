@@ -1,86 +1,19 @@
 /*
-Problem Description
+Reverse a linked list using recursion.
 
-Given a binary tree denoted by root node A and a leaf node B from this tree.
+Example :
 
- It is known that all nodes connected to a given node (left child, right child and parent) get burned in 1 second. Then all the nodes which are connected through one intermediate get burned in 2 seconds, and so on.
+Given 1->2->3->4->5->NULL,
 
-You need to find the minimum time required to burn the complete binary tree.
+return 5->4->3->2->1->NULL.
 
+PROBLEM APPROACH :
 
-
-Problem Constraints
-2 <= number of nodes <= 105
-
-1 <= node value, B <= 105
-
-node value will be distinct
-
-
-
-Input Format
-First argument is a root node of the binary tree, A.
-
-Second argument is an integer B denoting the node value of leaf node.
-
-
-
-Output Format
-Return an integer denoting the minimum time required to burn the complete binary tree.
-
-
-
-Example Input
-Input 1:
-
- Tree :      1 
-            / \ 
-           2   3 
-          /   / \
-         4   5   6
- B = 4
-Input 2:
-
- Tree :      1
-            / \
-           2   3
-          /     \
-         4       5 
- B = 5 
-
-
-Example Output
-Output 1:
-
- 4
-Output 2:
-
- 4
-
-
-Example Explanation
-Explanation 1:
-
- After 1 sec: Node 4 and 2 will be burnt. 
- After 2 sec: Node 4, 2, 1 will be burnt.
- After 3 sec: Node 4, 2, 1, 3 will be burnt.
- After 4 sec: Node 4, 2, 1, 3, 5, 6(whole tree) will be burnt.
- 
-Explanation 2:
-
- After 1 sec: Node 5 and 3 will be burnt. 
- After 2 sec: Node 5, 3, 1 will be burnt.
- After 3 sec: Node 5, 3, 1, 2 will be burnt.
- After 4 sec: Node 5, 3, 1, 2, 4(whole tree) will be burnt.
+Complete solution code in the hints
 */
 /*
-Solution Approach:
-The minimum time required will be equal to height of the tree observed from the given node.
-
-This should have worked, but it is not working. 
-Fuck IB.
-
-Fucker worked properly when I used map. Man, better to use mapping in these places.
+Solution approach:
+Use stack, better.
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -266,69 +199,41 @@ void dfs(TreeNode *root){
     }
 }
 
-void customPreOrder(TreeNode *root, unordered_map<int, vector<int> > &adj){
-    if(root == 0){
-        return;
-    }
+ListNode *solve(ListNode *root){
+    ListNode *head = 0;
+    ListNode *tail = 0;
 
-    int currentValue = root -> val;
-    if( root -> left != 0){
-        adj[currentValue].push_back(root -> left -> val);
-        adj[root -> left -> val].push_back(currentValue);
-        customPreOrder(root -> left, adj);
+    stack<ListNode *> st;
+    ListNode *temp = root;
+    while(temp != 0){
+        st.push(temp);
+        temp = temp -> next;
     }
-    if( root -> right != 0){
-        adj[currentValue].push_back(root -> right -> val);
-        adj[root -> right -> val].push_back(currentValue);
-        customPreOrder(root -> right, adj);
-    }
-}
-
-int solve(TreeNode *root, int b){
-    int result = 0;
-    unordered_map<int, int> visited;
-    unordered_map<int, vector<int> > adj;
-    customPreOrder(root, adj);
-    queue<int> parent;
-    queue<int> child;
-    parent.push(b);
-    while(!parent.empty()){
-
-        while(!parent.empty()){
-            int node = parent.front();
-            parent.pop();
-            visited[node] = 1;
-            vector<int> neighbours = adj[node];
-            for(int i=0; i<neighbours.size(); i++){
-                int currentNeighbour = neighbours[i];
-                if(visited[currentNeighbour] == 0){
-                    child.push(currentNeighbour);
-                }
-            }
+    while(!st.empty()){
+        ListNode *top = st.top();
+        st.pop();
+        if(head == 0){
+            head = top;
+            tail = top;
+        } else {
+            tail -> next = top;
+            tail = top;
         }
-
-        while(!child.empty()){
-            int front = child.front();
-            child.pop();
-            parent.push(front);
-        }
-        result++;
     }
 
-    return result - 1;
+    tail -> next = 0;
+    return head;
 }
 
 int main(){
-    int rootNode = 3;
-    vector<int> a = {1,2,4,5};
-    TreeNode *root = createTree(rootNode, a);
-    cout << "Given Tree is:" << endl;
-    inOrder(root); cout << endl;
-    int b = 1;
-    cout << "Node to start from is: " << b << endl;
-    
-    int result = solve(root, b);
-    cout << "Result: " << result << endl;
+    vector<int> a = {1,2,3,4,5};
+    ListNode *root = createLinkedList(a);
+    cout << "Given linked list is: " << endl;
+    printLinkedList(root);
+
+    ListNode *result = solve(root);
+    cout << "Result: " << endl;
+    printLinkedList(result);
     return 0;
 }
 
