@@ -18,9 +18,40 @@ void print2DVector(vector< vector<int> > arr){
     cout << endl;
 }
 
+void print2DVector(vector< vector<bool> > arr){
+    for(int i=0; i<arr.size(); i++){
+        for(int j=0; j<arr[i].size(); j++){
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+void print2DVector(vector< vector<char> > arr){
+    for(int i=0; i<arr.size(); i++){
+        for(int j=0; j<arr[i].size(); j++){
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+
 void printStrings(vector<string> arr){
     for(int i=0; i<arr.size(); i++){
         cout << arr[i] << endl;
+    }
+    cout << endl;
+}
+
+void print2DStrings(vector< vector<string> > arr){
+    for(int i=0; i<arr.size(); i++){
+        for(int j=0; j<arr[i].size(); j++){
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
     }
     cout << endl;
 }

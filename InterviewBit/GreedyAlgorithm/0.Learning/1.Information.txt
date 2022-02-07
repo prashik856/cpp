@@ -1,0 +1,11 @@
+What is Greedy Algorithm?
+A greedy algorithm is a simple and efficient algorithmic approach for solving any given problem by selecting the best available option at that moment of time, without bothering about the future results.
+In simple words, here, it is believed that the locally best choices made would be leading towards globally best results.
+In this approach, we never go back to reverse the decision of selection made which is why this algorithm works in a top-bottom manner.
+Advantages of Greedy Approach:
+It is easier to describe.
+It can perform better in most of the scenarios than other algorithms.
+
+NOTE: We have mentioned “in most of the scenarios” in the earlier point because in some cases, this approach doesn’t always produce correct results due to the nature of not reversing the decision made.
+This is why we opt for Dynamic Programming strategy in such scenarios.
+

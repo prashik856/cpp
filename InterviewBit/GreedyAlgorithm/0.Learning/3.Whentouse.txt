@@ -1,0 +1,12 @@
+Greedy Algorithms When To Use
+Lets look at the path finding question we were looking at in the previous slide.
+
+Greed is not always good- you may end up with a non-optimal solution (using more fuel than you could have). This is the natural trade-off for being a short-term visionary rather than a long-term visionary. Let me give you an elementary example where it fails. See the following directed network:
+
+
+
+Going by the intuition, you would choose first A and then you are stuck with the road of length 99. So you end up moving 100 units rather than a possible 10- had you visited B first, which did not seem attractive then. So greedy algorithm fails in this case. So why even use it? Because many times it works giving optimal solution while simply applying layman instincts. It turns out this network does have a greedy optimal solution but there computations must be done before leaving- in an intelligent manner. It is called Djikstra’s algorithm. This network is too simplistic to feel the algorithm*, and is best used for counterexamples. It’ll need a complex network to appreciate this algorithm and I leave it for another day.
+
+As with all things algorithmic, we can’t leave applications to hope and therefore NEED PROOFS of whether our suggested greedy algorithms work or not. When the greedy method doesn’t work, we look forward to something called dynamic programming methods.
+
+Now, lets look at some examples where greedy algorithm works.

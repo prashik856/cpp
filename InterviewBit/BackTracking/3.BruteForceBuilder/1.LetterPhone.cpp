@@ -197,83 +197,42 @@ void dfs(TreeNode *root){
     }
 }
 
-unordered_map<string, char> mapping;
-void getResult(string a, vector<int> indices, vector<string> &result){
-    printVector(indices);
-    string temp = "";
-    for(int i=0; i<a.size(); i++){
-        string key = "";
-        key.push_back(a[i]);
-        key.push_back('-');
-        string indexString = to_string(indices[i]);
-        key = key + indexString;
-        // cout << "Key: " << key << endl;
-        if(mapping.find(key) == mapping.end()){
-            return;
-        } else {
-            temp.push_back(mapping[key]);
-        }
-    }
-    // put it in the result
-    result.push_back(temp);
+void getResult(string a, vector<string> table, vector<string> &result){
+    queue<string> q;
+    q.push("");
+    while(!q.empty()){
+        string val = q.front();
+        q.pop();
 
-    // all combinations
-    int count = 0;
-    while(count < 4){
-        for(int i=0; i<indices.size(); i++){
-            indices[i]++;
-            getResult(a, indices, result);
+        if(val.length() == a.size()){
+            result.push_back(val);
+        } else {
+            // add all combinations
+            int numberValue = int(a[val.length()]) - int('0');
+            // cout << "Number value: " << numberValue << endl;
+            // string letter = table[numberValue];
+            for(auto letter : table[numberValue]){
+                // cout << letter << endl;
+                q.push(val + letter);
+            }
+            // cout << endl;
         }
-        count++;
     }
-    
 }
 
 vector<string> solve(string a){
     vector<string> result;
     int n = a.size();
-    
-    // initialize
-    vector<int> indices(n, 0);
-    mapping.clear();
+    vector<string> table = {
+        "0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
+    };
 
-    // initialize mapping
-    mapping["1-0"] = '1';
-    mapping["0-0"] = '0';
-    mapping["2-0"] = 'a';
-    mapping["2-1"] = 'b';
-    mapping["2-2"] = 'c';
-    mapping["3-0"] = 'd';
-    mapping["3-1"] = 'e';
-    mapping["3-2"] = 'f';
-    mapping["4-0"] = 'g';
-    mapping["4-1"] = 'h';
-    mapping["4-2"] = 'i';
-    mapping["5-0"] = 'j';
-    mapping["5-1"] = 'k';
-    mapping["5-2"] = 'l';
-    mapping["6-0"] = 'm';
-    mapping["6-1"] = 'n';
-    mapping["6-2"] = 'o';
-    mapping["7-0"] = 'p';
-    mapping["7-1"] = 'q';
-    mapping["7-2"] = 'r';
-    mapping["7-3"] = 's';
-    mapping["8-0"] = 't';
-    mapping["8-1"] = 'u';
-    mapping["8-2"] = 'v';
-    mapping["9-0"] = 'w';
-    mapping["9-1"] = 'x';
-    mapping["9-2"] = 'y';
-    mapping["9-3"] = 'z';
-
-    string temp = "";
-    getResult(a, indices, result);
+    getResult(a, table, result);
     return result;
 }
 
 int main(){
-    string a = "12340";
+    string a = "7941230";
     cout << "Given input array is: " << a << endl;
 
     vector<string> result = solve(a);
