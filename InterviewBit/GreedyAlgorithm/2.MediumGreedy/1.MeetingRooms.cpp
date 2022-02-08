@@ -73,7 +73,15 @@ Explanation 2:
 */
 /*
 Solution Approach:
-
+Yesss my technique worked.
+For this quesiton, we make use of priority queue and greedy.
+For greedy approach, we sort the meeting times.
+Start the first meeting, keep track of maximum rooms required and current rooms required.
+We need to look at when the meetings are going to end and next meeting is goint to start.
+Empty the rooms before starting a new meeting. This is done by using priority queue and popping all
+the elements when meeting start time > any other ongoing meeting time.
+We then push the current meeting end time in our queue, and update the meeting time that meeting value which 
+is going to end first. This is tracked by q.top() value.
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -290,8 +298,54 @@ void dfs(TreeNode *root){
     }
 }
 
+int solve(vector< vector<int> > &a){
+    int result = 0;
+
+    int n = a.size();
+    sort(a.begin(), a.end());
+    // we need to keep track of lowest value
+    // We will use priority queue for this
+    priority_queue<int, vector<int>, greater<int> > q;
+    result = 1;
+    int currentRooms = 1;
+    int r1 = a[0][1];
+    q.push(r1);
+    for(int i=1; i<n; i++){
+        int l2 = a[i][0];
+        int r2 = a[i][1];
+
+        // free all rooms
+        if(l2 >= r1){
+            // we can free rooms here
+            while(!q.empty() && l2 > q.top()){
+                currentRooms--;
+                q.pop();
+            }
+
+            // Put the current meeting in rooms
+            currentRooms++;
+            result = max(result, currentRooms);
+            q.push(r2);
+            r1 = q.top();
+        } else {
+            // We cannot free rooms here
+            currentRooms++;
+            result = max(result, currentRooms);
+            q.push(r2);
+            r1 = q.top();
+        }
+    }
+
+    return result;
+}
+
 int main(){
-    vector<int> a = {1,2,3,4,5};
+    vector< vector<int> > a = {{0, 30}, {5, 10}, {15, 20}};
+    cout << "Given meeting timings are: " << endl;
+    print2DVector(a);
+
+    int result = solve(a);
+    cout << "Minimum number of rooms required are: " << result << endl;
     return 0;
 }
 
