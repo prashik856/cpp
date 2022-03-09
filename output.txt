@@ -1,0 +1,3 @@
+Today, we don't have any centralized dashboard where we can see health of IOT components. 
+To check the health of any component, we need to visit multiple Grafana dashboards for a particular tenancy (Dev, Prod, Staging, Demo).
+Using Status Dashboard, we can have a centralized platform where we can see the health of IOT Components for all tenancies.
