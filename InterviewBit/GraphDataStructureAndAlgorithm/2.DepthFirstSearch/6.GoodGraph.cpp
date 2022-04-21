@@ -1,74 +1,35 @@
 /*
+Given a directed graph of N nodes where each node is pointing to any one of the N nodes (can possibly point to itself). Ishu, the coder, is bored and he has discovered a problem out of it to keep himself busy. Problem is as follows:
 
-Problem Description
+A node is 'good'if it satisfies one of the following:
 
-Given a tree with N nodes labelled from 1 to N.
+1. It is the special node (marked as node 1)
+2. It is pointing to the special node (node 1)
+3. It is pointing to a good node.
+Ishu is going to change pointers of some nodes to make them all ‘good’. You have to find the min. number of pointers to change in order to
 
-Each node is either good or bad denoted by binary array A of size N where if A[i] is 1 then ithnode is good else if A[i] is 
-0 then ith node is bad.
+make all the nodes good (Thus, a Good Graph).
 
-Also the given tree is rooted at node 1 and you need to tell the number of root to leaf paths in the tree that contain not more than C good nodes.
+Note: Resultant Graph should hold the property that all nodes are good and each node must point to exactly one node.
 
-NOTE:
+Constraints:
 
-Each edge in the tree is bi-directional.
+1 <= N <= 100,000
+Input:
 
+A vector of N integers containing N numbers all between 1 to N, where i-th number is the number of node that i-th node is pointing to.
+Output:
 
-Problem Constraints
-2 <= N <= 105
+An Integer denoting min. number of pointer changes.
+Example:
 
-A[i] = 0 or A[i] = 1
+input: [1, 2, 1, 2]
+output: 1 (Pointer of node 2 is made to point to node 1)
 
-0 <= C <= N
-
-
-
-Input Format
-First argument is an binary integer array A of size N.
-
-Second argument is a 2-D array B of size (N-1) x 2 denoting the edge of the tree.
-
-Third argument is an integer C.
-
-
-
-Output Format
-Return an integer denoting the number of root to leaf paths in the tree that contain not more than C good nodes.
-
-
-
-Example Input
-Input 1:
-
- A = [0, 1, 0, 1, 1, 1]
- B = [  [1, 2]
-        [1, 5]
-        [1, 6]
-        [2, 3]
-        [2, 4]
-     ]
- C = 1
-
-
-Example Output
-Output 1:
-
- 3
-
-
-Example Explanation
-Explanation 1:
-
- Path (1 - 2 - 3) and (1 - 5) and (1 - 6) are the paths which contain atmost C nodes.
- */
-/*
-Solution Approach:
-The graph given is bi-directional.
-We use of adj matrix to check if the current node is a leaf.
-A leaf will be the one whose adj[] value will be 1, and that 1 node will be it's parent.
-Now, while traveling, we keep track of current number of good nodes. When we encounter a leaf, 
-we check our current count and increment the result if current count is less than c.
+input: [3, 1, 3, 1]
+output: 1 (Pointer of node 3 is made to point to node 1)
 */
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -284,72 +245,8 @@ void dfs(TreeNode *root){
     }
 }
 
-void customDFS(int root, 
-            vector<int> &a, 
-            int c, 
-            int* result, 
-            vector<bool> &visited, 
-            vector< vector<int> > &adj,
-            int current_goods,
-            int parent){
-    // cout << "Current Node: " << root << endl;
-    // cout << "Current Goods: " << current_goods << endl;
-    visited[root] = true;
-    if(a[root] == 1){
-        current_goods++;
-    }
-
-    // see if this is leaf
-    if(adj[root].size() == 1 && adj[root][0] == parent){
-        // leaf
-        if(current_goods <= c){
-            (*result) = (*result) + 1;
-        }
-        return;
-    } else {
-        // not a leaf
-        for(int i=0; i<adj[root].size(); i++){
-            int neighbour = adj[root][i];
-            if(!visited[neighbour]){
-                customDFS(neighbour, a, c, result, visited, adj, current_goods, root);
-            }
-        }
-    }
-    return;
-}
-
-int solve(vector<int> &a, vector< vector<int> > &b, int c){
-    int result = 0;
-
-    // Create adj list
-    vector< vector<int> > adj(a.size(), vector<int>());
-    for(int i=0; i<b.size(); i++){
-        int to = b[i][0] - 1;
-        int from = b[i][1] - 1;
-        adj[to].push_back(from);
-        adj[from].push_back(to);
-    }
-
-    // Now, all the nodes with adj list of value 1 will be a leaf
-    vector<bool> visited(a.size(), false);
-    int parent = -1;
-    customDFS(0, a, c, &result, visited, adj, 0, parent);
-
-    return result;
-}
-
 int main(){
-    vector<int> a = {0, 1, 0, 1, 1, 1};
-    vector< vector<int> > b = {{1, 2}, {1, 5}, {1, 6}, {2, 3}, {2, 4}};
-    int c = 1;
-    cout << "Given good bad vector is: " << endl;
-    printVector(a);
-    cout << "Given edge vector is: " << endl;
-    print2DVector(b);
-    cout << "Given limit is: " << c << endl;
-
-    int result = solve(a, b, c);
-    cout << "Result: " << result << endl;    
+    vector<int> a = {1,2,3,4,5};
     return 0;
 }
 

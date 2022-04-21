@@ -25,8 +25,11 @@ Note that 1 corresponds to true, and 0 corresponds to false.
 */
 /*
 Solution:
-How are we doint this? 
-Let's see using normal dfs?
+Find all the points where the first character of input string equals to board character.
+From that character, run to all the 4 directions.
+In the recursive function, take care of of input indices.
+If next character is equal, we move on to next index, and then again in all four directions.
+if found, return.
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -243,55 +246,72 @@ void dfs(TreeNode *root){
     }
 }
 
+void doCustomDFS(int i, int j, vector<string> &a, int index, string &b, bool *found, int n, int m){
+    // cout << "Inside custom DFS" << endl;
+    // if found
+    if(*found){
+        return;
+    }
+
+    // if i is less than 0 or i is greater than equal to n
+    if(i < 0 || i >=n){
+        return;
+    }
+
+    // if j is less than 0 or j is greater than equal to m
+    if(j < 0 || j >= m){
+        return;
+    }
+    // cout << "Current word to search: " <<  b[index] << endl;
+    // cout << "Current word: " << a[i][j] << endl;
+
+    // if equal
+    if(a[i][j] == b[index]){
+        // cout << "Found: " << a[i][j] << " " << endl;
+        // what is current index value?
+        if(index + 1 >= b.size()){
+            *found = true;
+            return;
+        }
+        // our index value is yet to reach the end
+        // move ahead to four sides
+        doCustomDFS(i+1, j, a, index+1, b, found, n, m);
+        doCustomDFS(i, j+1, a, index+1, b, found, n, m);
+        doCustomDFS(i-1, j, a, index+1, b, found, n, m);
+        doCustomDFS(i, j-1, a, index+1, b, found, n, m);
+    }
+    return;
+}
+
 int solve(vector<string> &a, string &b){
     int result = 0;
 
     int n = a.size();
     int m = a[0].size();
-    
-    // Created Graph
-    vector< vector< pair<int, int> > > adj;
+
+    // let's start
+    int index = 0;
+    bool found = false;
     for(int i=0; i<n; i++){
         for(int j=0; j<m; j++){
-            // left, right, up, down
-            int row = i;
-            int col = j;
-            char val;
-            if(row - 1 >= 0){
-                val = a[row-1][col];
-
+            if(a[i][j] == b[index]){
+                // search here
+                // cout << "Found: "  << a[i][j] << endl;
+                doCustomDFS(i+1,j,a,index+1,b,&found, n, m);
+                doCustomDFS(i,j+1,a,index+1,b,&found, n, m);
+                doCustomDFS(i-1,j,a,index+1,b,&found, n, m);
+                doCustomDFS(i,j-1,a,index+1,b,&found, n, m);
             }
-
-            if(row + 1 < n){
-
+            if(found){
+                result = 1;
+                break;
             }
-
-            if(col - 1 >= 0){
-
-            }
-
-            if(col + 1 < m ){
-
-            }
+            // cout << endl;
         }
-    }
-
-    // Get all indices which starts from b[0]
-    queue< vector<int> > indices;
-    for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
-            if(a[i][j] == b[0]){
-                vector<int> temp = {i,j};
-                indices.push(temp);
-            }
+        if(found){
+            result = 1;
+            break;
         }
-    }
-
-    int found = 0;
-    while(!indices.size() && found == 0){
-        vector<int> temp = indices.front();
-        indices.pop();
-
     }
 
     return result;
@@ -301,7 +321,7 @@ int main(){
     vector<string> a = { "ABCE",
                         "SFCS",
                         "ADEE"};
-    string b = "ABCCED";
+    string b = "ABCD";
     cout << "Given word board is: " << endl;
     printStrings(a);
     cout << "Given string to find is: " << endl;
