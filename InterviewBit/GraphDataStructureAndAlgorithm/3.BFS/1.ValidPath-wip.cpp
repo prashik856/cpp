@@ -1,62 +1,43 @@
 /*
-Problem Description
+There is a rectangle with left bottom as  (0, 0) and right up as (x, y). There are N circles such that their centers are inside the rectangle.
 
-Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+Radius of each circle is R. Now we need to find out if it is possible that we can move from (0, 0) to (x, y) without touching any circle.
+
+Note :  We can move from any cell to any of its 8 adjecent neighbours and we cannot move outside the boundary of the rectangle at any point of time.
+
 
 
 
 Input Format
-First and only argument is root node of the binary tree, A.
 
-
-
+1st argument given is an Integer x.
+2nd argument given is an Integer y.
+3rd argument given is an Integer N, number of circles.
+4th argument given is an Integer R, radius of each circle.
+5th argument given is an Array A of size N, where A[i] = x cordinate of ith circle
+6th argument given is an Array B of size N, where B[i] = y cordinate of ith circle
 Output Format
-Return a 2D integer array denoting the zigzag level order traversal of the given binary tree.
 
+Return YES or NO depending on weather it is possible to reach cell (x,y) or not starting from (0,0).
+Constraints
 
+0 <= x, y, R <= 100
+1 <= N <= 1000
+Center of each circle would lie within the grid
+For Example
 
-Example Input
-Input 1:
-
-    3
-   / \
-  9  20
-    /  \
-   15   7
-Input 2:
-
-   1
-  / \
- 6   2
-    /
-   3
-
-
-Example Output
-Output 1:
-
- [
-   [3],
-   [9, 20],
-   [15, 7]
- ]
-Output 2:
-
- [ 
-   [1]
-   [6, 2]
-   [3]
- ]
-
-
-Example Explanation
-Explanation 1:
-
- Return the 2D array. Each row denotes the traversal of each level.
-*/
-/*
-Solution Approach:
-easy parent and child queues.
+Input:
+    x = 2
+    y = 3
+    N = 1
+    R = 1
+    A = [2]
+    B = [3]
+Output:
+    NO
+   
+Explanation:
+    There is NO valid path in this case
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -271,38 +252,6 @@ void dfs(TreeNode *root){
             s.push(node -> right);
         }
     }
-}
-
-vector< vector<int> > solve(TreeNode *a){
-    vector< vector<int> > result;
-
-    queue<TreeNode *> parent;
-    queue<TreeNode *> child;
-    parent.push(a);
-    while(!parent.empty()){
-        vector<int> temp;
-        while(!parent.empty()){
-            TreeNode *node = parent.front();
-            temp.push_back(node->val);
-            parent.pop();
-            if(node -> left != 0){
-                child.push(node -> left);
-            }
-            if(node -> right != 0){
-                child.push(node -> right);
-            }
-        }
-        // Now, parent queue is empty
-        // put everything into parent.
-        while(!child.empty()){
-            TreeNode *node = child.front();
-            child.pop();
-            parent.push(node);
-        }
-        result.push_back(temp);
-    }
-
-    return result;
 }
 
 int main(){
