@@ -180,6 +180,9 @@ void postOrder(TreeNode *root){
 
 // Breadth first search
 void bfs(TreeNode *root){
+    if(root == 0){
+        return;
+    }
     queue<TreeNode *> q;
     q.push(root);
 
