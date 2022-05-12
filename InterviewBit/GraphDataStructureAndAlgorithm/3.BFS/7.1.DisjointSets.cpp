@@ -1,91 +1,4 @@
-/*
-
-Problem Description
-
-Rishabh has a permutation A of N integers 1, 2, ... N but he doesn't like it. Rishabh wants to get a permutation B.
-
-Also, Rishabh has some M good pairs given in a form of 2D matrix C of size M x 2  where (C[i][0], C[i][1]) denotes that two indexes of the permutation A.
-
-In one operation he can swap Ax and Ay only if (x, y) is a good pair.
-
-You have to tell whether Rishabh can obtain permutation B by performing the above operation any number of times on permutation A.
-
-If the permutation B can be obtained return 1 else return 0.
-
-
-
-Problem Constraints
-2 <= N <= 105
-1 <= M <= 105
-1 <= A[i], B[i] <= N
-A[i] and B[i] are all distinct.
-1 <= C[i][0] < C[i][1] <= N
-
-
-Input Format
-First arguement is an integer array A of size N denoting the permutation A.
-
-Second arguement is an integer array B of size N denoting the permutation B.
-
-Third argument is an 2D integer array C of size M x 2 denoting the M good pairs.
-
-
-
-Output Format
-If the permutation B can be obtained return 1 else return 0.
-
-
-
-Example Input
-Input 1:
-
- A = [1, 3, 2, 4]
- B = [1, 4, 2, 3]
- C = [ 
-        [3, 4]
-     ]
-Input 2:
-
- A = [1, 3, 2, 4]
- B = [1, 4, 2, 3]
- C = [
-        [2, 4]
-     ] 
-
-
-Example Output
-Output 1:
-
- 0
-Output 2:
-
- 1
-
-
-Example Explanation
-Explanation 1:
-
- As A != B you have to perform operations on A but there is only good pair available i,e (3, 4) so if you swap
- A3 with A4 you get A = [1, 3, 4, 2] which is not equal to B so we will return 0.
-Explanation 2:
-
- As A != B you have to perform operations on A but there is only good pair available i,e (2, 4) so if you swap
- A2 with A4 you get A = [1, 4, 2, 3] which is equal to B so we will return 1.
-*/
-/*
-Solution Approach:
-I think this is a Disjoint set question.
-Now, assume our A is something like:
-a,b,c,d,e,f,g,h
-
-B is:
-d,e,f,g,h,a,b,c
-Now, we first find all the disjoint sets (all swappable pairs groups)
-
-Then, we go through a and which value doesn't match.
-if a[i] and b[i] doesn't match, they are swappable only if a[i] and b[i] has the same root.
-else they are not swappable.
-*/
+// Page: https://www.geeksforgeeks.org/disjoint-set-data-structures/
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -303,22 +216,19 @@ void dfs(TreeNode *root){
 
 class DisjointSet {
     private:
-        unordered_map<int, int> parent;
-        unordered_map<int, int> rank;
-        vector<int> n;
+        vector<int> parent;
+        vector<int> rank;
+        int n;
     public:
-        DisjointSet(vector<int> &N){
-            parent.clear();
-            rank.clear();
-            n.clear();
+        DisjointSet(int N){
             n = N;
             // parent of i is i
-            for(int i=0; i<n.size(); i++){
-                parent[n[i]] = n[i];
+            for(int i=0; i<n; i++){
+                parent.push_back(i);
             }
             // rank is 0?
-            for(int i=0; i<n.size(); i++){
-                rank[n[i]] = 0;
+            for(int i=0; i<n; i++){
+                rank.push_back(0);
             }
         }
 
@@ -378,56 +288,25 @@ class DisjointSet {
         }
 };
 
-int solve(vector<int> &a, vector<int> &b, vector< vector<int> > &c){
-    int result = 1;
-
-    DisjointSet dset(a);
-    for(int i=0; i<c.size(); i++){
-        int to = c[i][0] - 1;
-        int from = c[i][1] - 1;
-        int toVal = a[to];
-        int fromVal = a[from];
-        dset.getUnion(toVal, fromVal);
-    }
-    // for(int i=0; i<a.size(); i++){
-    //     cout << a[i] << " -> " << dset.find(a[i]) << endl;
-    // }
-    for(int i=0; i<a.size(); i++){
-        int aval = a[i];
-        int bval = b[i];
-
-        if(aval == bval){
-            continue;
-        } else {
-            int arep = dset.find(aval);
-            int brep = dset.find(bval);
-            if(arep == brep){
-                continue;
-            } else {
-                result = 0;
-                break;
-            }
-        }
-    }
-
-    return result;
-}
-
 int main(){
-    vector<int> a = {1, 3, 2, 4};
-    vector<int> b = {1, 4, 2, 3};
-    vector< vector<int> > c = {
-        {2, 4}
-    };
-    cout << "Given input is: " << endl;
-    printVector(a);
-    cout << "Required pattern is: " << endl;
-    printVector(b);
-    cout << "Given good pairs are: " << endl;
-    print2DVector(c);
+    int a = 5;
+    vector< vector<int> > b = {{0,2}, {4,2}, {3,1}};
+    DisjointSet dset(a);
+    cout << "All parents: " << endl;
+    for(int i=0; i<a; i++){
+        cout << i << " -> " << dset.find(i) << endl;
+    }
 
-    int result = solve(a, b, c);
-    cout << "Result: " << result << endl;
+    for(int i=0; i<b.size(); i++){
+        int to = b[i][0];
+        int from = b[i][1];
+        dset.getUnion(to, from);
+    }
+    cout << "Updated parents: " << endl;
+    for(int i=0; i<a; i++){
+        cout << i << " -> " << dset.find(i) << endl;
+    }
+    cout << endl;
     return 0;
 }
 

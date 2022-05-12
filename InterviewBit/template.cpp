@@ -196,6 +196,82 @@ void bfs(TreeNode *root){
     }
 }
 
+class DisjointSet {
+    private:
+        vector<int> parent;
+        vector<int> rank;
+        int n;
+    public:
+        DisjointSet(int N){
+            parent.clear();
+            rank.clear();
+            n = N;
+            // parent of i is i
+            for(int i=0; i<n; i++){
+                parent.push_back(i);
+            }
+            // rank is 0?
+            for(int i=0; i<n; i++){
+                rank.push_back(0);
+            }
+        }
+
+        int find(int i){
+            if(parent[i] == i){
+                return i;
+            }
+
+            else {
+                // since parent[i] != i, we find representative of parent[i]
+                int result = find(parent[i]);
+                
+                // Cache value
+                parent[i] = result;
+                
+                return result;
+            }
+        }
+
+        void getUnion(int i, int j) {
+            /*
+            1. If the rank of left is less than the rank of right, then it’s best to move left under right, 
+            because that won’t change the rank of right (while moving right under left would increase the height). 
+            2. In the same way, if the rank of right is less than the rank of left, then we should move right under left.
+            3. If the ranks are equal, it doesn’t matter which tree goes under the other, but the rank of the result will 
+            always be one greater than the rank of the trees.
+            */
+            // get root of i
+            int irep = find(i);
+
+            // get root of j
+            int jrep = find(j);
+
+            // if irep == jrep, we have same root
+            if(irep == jrep){
+                return;
+            }
+
+            // Else, let's get their ranks
+            int rankirep = rank[irep];
+            int rankjrep = rank[jrep];
+
+            if(rankirep == rankjrep){
+                // set anything
+                parent[irep] = jrep;
+                // put i under j
+                // increase rank of j
+                rank[jrep]++;
+            } else if(rankirep > rankjrep) {
+                // we move j under i, and we don't have to increase the rank of i
+                parent[jrep] = irep;
+            } else {
+                // rankjrep > rankirep
+                // we move i under j, and we don't have to increase the rank of j
+                parent[irep] = jrep;
+            }
+        }
+};
+
 // Depth first search using Stack
 void dfs(TreeNode *root){
     stack<TreeNode *> s;
