@@ -42,7 +42,35 @@ Explanation 2:
 */
 /*
 Solution approach:
+https://www.geeksforgeeks.org/count-ways-divide-circle-using-n-non-intersecting-chords/
 
+-> If we draw a chord between any two points, can you observe the current set of points getting broken into two smaller 
+sets S_1 and S_2. 
+-> If we draw a chord from a point in S_1 to a point in S_2, it will surely intersect the chord we’ve just drawn. 
+-> So, we can arrive at a recurrence that Ways(n) = sum[i = 0 to n-1] { Ways(i)*Ways(n-i-1) }. 
+-> Here we iterate over i, assuming that size of one of the sets is i and size of another set automatically is 
+(n-i-1) since we’ve already used a pair of points and i pair of points in one set. 
+
+int chordCnt( int A){
+ 
+    // n = no of points required
+    int n = 2 * A;
+     
+    // dp array containing the sum
+    int dpArray[n + 1]={ 0 };
+    dpArray[0] = 1;
+    dpArray[2] = 1;
+    for (int i=4;i<=n;i+=2){
+        for (int j=0;j<i-1;j+=2){
+             
+          dpArray[i] +=
+            (dpArray[j]*dpArray[i-2-j]);
+        }
+    }
+ 
+    // returning the required number
+    return dpArray[n];
+}
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -338,8 +366,42 @@ void dfs(TreeNode *root){
     }
 }
 
+
+int solve(int a) {
+    int result = 0;
+    int MOD = 1000000007;
+    int indexA = 0;
+
+    // Ways(n) = sum[i = 0 to n-1] { Ways(i)*Ways(n-i-1) }. 
+    // We try to convert the above expression in dp
+    // Since we store answer of every state in dp, let i be any (0....a)
+    // ways(i) = sum(j=0..i-1){ways(j) * ways(i-j-1)}
+    int n = 2*a;
+    vector<long> table(n+1, 0);
+    // base conditions
+    table[0] = 1;
+    // when a == 1
+    table[2] = 1;
+    // cannot start from odd number
+    for(int i=4; i<=n; i += 2) {
+        for(int j=0; j<i-1; j+=2){
+            // no need to include odd numbers
+            long tempResult = table[j] * table[i - j - 2];
+            tempResult = tempResult % MOD;
+            table[i] += tempResult;
+            table[i] = table[i] % MOD;
+        }   
+    }
+    result = table[n];
+    return result;
+}
+
 int main(){
-    vector<int> a = {1,2,3,4,5};
+    int a = 1000;
+    cout << "Given input: " << a << endl;
+
+    int result = solve(a);
+    cout << "Result: " << result << endl;
     return 0;
 }
 
