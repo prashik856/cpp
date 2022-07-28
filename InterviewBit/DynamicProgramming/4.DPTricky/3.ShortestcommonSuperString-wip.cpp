@@ -1,158 +1,78 @@
 /*
-Find longest Arithmetic Progression in an integer array A of size N, and return its length.
+Given a set of strings, A of length N.
 
-More formally, find longest sequence of indices, 0 < i1 < i2 < … < ik < ArraySize(0-indexed) such that sequence A[i1], A[i2], …, A[ik] is an Arithmetic Progression.
-
-Arithmetic Progression is a sequence in which all the differences between consecutive pairs are the same, i.e sequence B[0], B[1], B[2], …, B[m - 1] of length m is an Arithmetic Progression if and only if B[1] - B[0] == B[2] - B[1] == B[3] - B[2] == … == B[m - 1] - B[m - 2]
-
-Note: The common difference can be positive, negative or 0.
+Return the length of smallest string which has all the strings in the set as substring.
 
 
 
 Input Format:
 
-The first and the only argument of input contains an integer array, A.
+The first and the only argument has an array of strings, A.
 Output Format:
 
-Return an integer, representing the length of the longest possible arithmetic progression.
+Return an integer representing the minimum possible length of the resulting string.
 Constraints:
 
-1 <= N <= 1000
-1 <= A[i] <= 1e9
-Examples:
+1 <= N <= 18
+1 <= A[i] <= 100
+Example:
 
 Input 1:
-    A = [3, 6, 9, 12]
+    A = ["aaaa", "aa"]
 
 Output 1:
     4
 
 Explanation 1:
-    [3, 6, 9, 12] form an arithmetic progression.
+    Shortest string: "aaaa"
 
 Input 2:
-    A = [9, 4, 7, 2, 10]
+    A = ["abcd", "cdef", "fgh", "de"]
 
 Output 2:
-    3
+    8
 
 Explanation 2:
-    [4, 7, 10] form an arithmetic progression.
+    Shortest string: "abcdefgh"
 */
 /*
-Solution approach:
-https://www.geeksforgeeks.org/longest-arithmetic-progression-dp-35/
-Lenght of Longest Arithmatic Progression (LLAP)
--> A simple solution is to one by one consider every pair as first two elements of AP and check for the remaining elements 
-in sorted set. 
--> To consider all pairs as first two elements, we need to run a O(n^2) nested loop. 
--> Inside the nested loops, we need a third loop which linearly looks for the more elements in Arithmetic Progression (AP). 
--> This process takes O(n3) time. 
+Solution Approach:
+https://www.geeksforgeeks.org/shortest-superstring-problem/
 
-We can solve this problem in O(n2) time using Dynamic Programming. 
-To get idea of the DP solution, let us first discuss solution of following simpler problem.
+Let arr[] be given set of strings.
 
-Given a sorted set, find if there exist three elements in Arithmetic Progression or not 
-- Please note that, the answer is true if there are 3 or more elements in AP, otherwise false.
-- To find the three elements, we first fix an element as middle element and search for other two (one smaller and one greater).
-- We start from the second element and fix every element as middle element. 
-- For an element set[j] to be middle of AP, there must exist elements ‘set[i]’ and ‘set[k]’ such that 
-    set[i] - d + set[k] + d= 2*set[j] where 0 <= i < j and j < k <=n-1. 
-- How to efficiently find i and k for a given j? We can find i and k in linear time using following simple algorithm. 
--> Initialize i as j-1 and k as j+1
--> Do following while i >= 0 and k <= n-1
--> If set[i] + set[k] is equal to 2*set[j], then we are done.
-        If set[i] + set[k] > 2*set[j], 
-            then decrement i (do i–).
-        Else if set[i] + set[k] < 2*set[j], 
-            then increment k (do k++).
-// The function returns true if there exist three
-// elements in AP Assumption: set[0..n-1] is sorted.
-// The code strictly implements the algorithm provided
-// in the reference.
-bool arithmeticThree(vector<int> set, int n)
-{
-     
-    // One by fix every element as middle element
-    for(int j = 1; j < n - 1; j++)
-    {
-         
-        // Initialize i and k for the current j
-        int i = j - 1, k = j + 1;
- 
-        // Find if there exist i and k that form AP
-        // with j as middle element
-        while (i >= 0 && k <= n-1)
-        {
-            if (set[i] + set[k] == 2 * set[j])
-                return true;
-                 
-            (set[i] + set[k] < 2 * set[j]) ? k++ : i--;
-        }
-    }
-    return false;
-}
+1) Create an auxiliary array of strings, temp[].  Copy contents
+   of arr[] to temp[]
+2) While temp[] contains more than one strings
+     a) Find the most overlapping string pair in temp[]. Let this
+        pair be 'a' and 'b'. 
+     b) Replace 'a' and 'b' with the string obtained after combining
+        them.
+3) The only string left in temp[] is the result, return it.
 
-How to extend the above solution for the original problem? 
-- The above function returns a boolean value. 
-- The required output of original problem is Length of the Longest Arithmetic Progression (LLAP) which is an integer value. 
-- If the given set has two or more elements, then the value of LLAP is at least 2 (Because two elements are always in AP)
-- The idea is to create a 2D table L[n][n]. 
-- An entry L[i][j] in this table stores LLAP with set[i] and set[j] as first two elements of AP and j > i. 
-- The last column of the table is always 2 (Why – see the meaning of L[i][j]). 
-- Rest of the table is filled from bottom right to top left. 
-- To fill rest of the table, j (second element in AP) is first fixed. 
-- i and k are searched for a fixed j. 
-- If i and k are found such that i, j, k form an AP, then the value of L[i][j] is set as L[j][k] + 1. 
-- Note that the value of L[j][k] must have been filled before as the loop traverses from right to left columns.
+arr[] = {"catgc", "ctaagt", "gcta", "ttca", "atgcatc"}
+Initialize:
+temp[] = {"catgc", "ctaagt", "gcta", "ttca", "atgcatc"}
 
+The most overlapping strings are "catgc" and "atgcatc"
+(Suffix of length 4 of "catgc" is same as prefix of "atgcatc")
+Replace two strings with "catgcatc", we get
+temp[] = {"catgcatc", "ctaagt", "gcta", "ttca"}
 
-// Now, the above solution will work when we have a sorted array as input
-What if the array is not sorted?
-https://www.geeksforgeeks.org/longest-subsequence-forming-an-arithmetic-progression-ap/?ref=rp
+The most overlapping strings are "ctaagt" and "gcta"
+(Prefix of length 3 of "ctaagt" is same as suffix of "gcta")
+Replace two strings with "gctaagt", we get
+temp[] = {"catgcatc", "gctaagt", "ttca"}
 
-// Not able to understand.
-Better see this video:
-https://www.youtube.com/watch?v=Lm38EAoDc7c&ab_channel=ChirayuJain
-How to apporach this problem?
-Make some observations:
-A = [9, 4, 7, 2, 10]
-Let's node down all the differences
-for 9, 4 - 9 = -5
-        7 - 9 = -2
-        2 - 9 = -7
-        10 - 9 = 1
-for 4, 7-4 = 3
-        2 - 4 = -2
-        1- - 4 = 6
-for 7, 2 - 7 = -5
-        10 - 7 = 3
-for 2, 10 - 2 = 8
-Listed down all the differences
+The most overlapping strings are "catgcatc" and "ttca"
+(Prefix of length 2 of "catgcatc" as suffix of "ttca")
+Replace two strings with "ttcatgcatc", we get
+temp[] = {"ttcatgcatc", "gctaagt"}
 
-Observation from this example:
-There will be two states in our DP solution
-1. Difference
-2. last value of AP with that difference
+Now there are only two strings in temp[], after combing
+the two in optimal way, we get tem[] = {"gctaagttcatgcatc"}
 
-DP[val][diff] will contain the number of elements of AP whose last element is val
-and difference is diff
-Now, how do we store these kind of values?
-we can use vector< unordered_map<int, int> >.
-for(int i=n-2; i>=0; i--){
-    for(int j=i+1; j<n; j++){
-        int difference = a[j] - a[i];
-
-        // check if cache exists
-        if yes -> get value, and update the dp
-        if no -> update the dp
-
-        keep track of global maximum.
-    }
-}
-
-// The solution below got accepted in leetcode. 
-Fuck interview bit for having numbers > 500
+Since temp[] has only one string now, return it.
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -165,6 +85,16 @@ void printVector(vector<int> arr){
 }
 
 void print2DVector(vector< vector<int> > arr){
+    for(int i=0; i<arr.size(); i++){
+        for(int j=0; j<arr[i].size(); j++){
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+void print2DVector(vector< vector<long> > arr){
     for(int i=0; i<arr.size(); i++){
         for(int j=0; j<arr[i].size(); j++){
             cout << arr[i][j] << " ";
@@ -448,59 +378,26 @@ void dfs(TreeNode *root){
     }
 }
 
-int solve(vector<int> &a){
+int solve(vector<string> &a) {
     int result = 0;
-    int n = a.size();
-
-    // base case
-    if(n <= 2) {
-        return n;
+    if(a.size() == 1){
+        return 1;
     }
-
-    // n will the last value of ap series
-    // and unordered_map key will store the value of difference and value will store the value of 
-    vector< vector<int> > dp(n, vector<int>(1001, 0));
-
-    for(int i=0; i<n; i++){
-        for(int j=i+1; j<n; j++) {
-            // cout << "j -> " << j << " -> " << a[j] << endl;
-            // cout << "i -> " << i << " -> " << a[i] << endl;
+    vector<string> temp = a;
+    for(int i=0; i<a.size(); i++){
+        for(int j=0; j<a[0].size(); j++){
+            // Find the most overlapping pair?
             
-            int difference = a[j] - a[i] + 500;
-            // cout << "Difference: " << difference << endl;
-            int currentValue = 2;
-
-            // see if this value exists
-            if(dp[i][difference] != 0){
-                // cout << "hit" << endl;
-                // cout << "Cached value: " << existingMap[difference] << endl;
-                // found it
-                currentValue = 1 + dp[i][difference];
-
-                // Store incremented value in a new map
-                // cout << "New value: " << currentValue << endl;
-                // Store the optimal value
-                dp[j][difference] = max(currentValue, dp[j][difference]);
-            } else {
-                // cout << "No hit" << endl;
-                // not found
-                currentValue = 2;
-                // cout << "New value: " << currentValue << endl;
-                // Store the optimal value
-                dp[j][difference] = max(dp[j][difference], currentValue);
-            }
-            result = max(result, dp[j][difference]);
         }
     }
-    // print2DVector(dp);
 
     return result;
 }
 
 int main(){
-    vector<int> a = {1, 1, 1, 1, 1};
-    cout << "Given input vector is: " << endl;
-    printVector(a);
+    vector<string> a = {"catgc", "ctaagt", "gcta", "ttca", "atgcatc"};
+    cout << "Given strings are: " << endl;
+    printStrings(a);
 
     int result = solve(a);
     cout << "Result: " << result << endl;
