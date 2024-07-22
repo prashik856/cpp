@@ -1,7 +1,5 @@
 /*
 Problem Description
- 
- 
 
 Given the root of a binary tree A, the value of a target node B, and an integer C, return an array of the values of all nodes that have a distance C from the target node.
 

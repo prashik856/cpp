@@ -1,15 +1,18 @@
 /*
 Problem Description
 
-Given a string A of size N, find and return the longest palindromic substring in A.
+Given a string A of size N, find and return the longest palindromic 
+substring in A.
 
 Substring of string A is A[i...j] where 0 <= i <= j < len(A)
 
 Palindrome string:
 
-A string which reads the same backwards. More formally, A is palindrome if reverse(A) = A.
+A string which reads the same backwards. 
+More formally, A is palindrome if reverse(A) = A.
 
-Incase of conflict, return the substring which occurs first ( with the least starting index).
+Incase of conflict, return the substring which occurs first 
+( with the least starting index).
 
 
 
@@ -40,7 +43,8 @@ The idea is taken from here:
 https://www.geeksforgeeks.org/manachers-algorithm-linear-time-longest-palindromic-substring-part-1/?ref=rp
 
 We need to check Palindrome condition from each index.
-Either as current index as center (count = 1), or current index as not a center(count =0),
+Either as current index as center (count = 1), 
+or current index as not a center(count =0),
 and then we move out accordingly.
 */
 

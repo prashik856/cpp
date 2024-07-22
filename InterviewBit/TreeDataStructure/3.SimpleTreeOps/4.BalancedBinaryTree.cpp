@@ -27,7 +27,8 @@ Return : False or 0
 */
 /*
 Solution Approach:
-Got through every node, get height of each subtree, and calculate their difference.
+Got through every node, get height of each subtree, 
+and calculate their difference.
 If difference is > 1, return 0 and break our recurtion.
 Else, continue recurtion.
 */

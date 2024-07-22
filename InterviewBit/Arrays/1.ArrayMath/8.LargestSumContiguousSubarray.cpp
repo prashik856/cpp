@@ -17,7 +17,8 @@ return max_so_far
 
 /*
 
-Find the contiguous subarray within an array, A of length N which has the largest sum.
+Find the contiguous subarray within an array, 
+A of length N which has the largest sum.
 
 Input Format:
 

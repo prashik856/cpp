@@ -1,7 +1,8 @@
 /*
 Problem Description
 
-Given a binary tree A consisting of N nodes, return a 2-D array denoting the vertical order traversal of A.
+Given a binary tree A consisting of N nodes, return a 2-D array denoting 
+the vertical order traversal of A.
 
 Go through the example and image for more details.
 

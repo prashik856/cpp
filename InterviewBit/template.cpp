@@ -1,4 +1,10 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<stack>
+#include<queue>
+#include<unordered_map>
+#include<unordered_set>
+#include<algorithm>
 using namespace std;
 
 void printVector(vector<int> arr){
@@ -48,6 +54,21 @@ void print2DVector(vector< vector<char> > arr){
     cout << endl;
 }
 
+void print4DVector(vector< vector< vector< vector<int>>>> arr) {
+    for(int i=0; i<arr.size(); i++) {
+        cout << i << " : " << endl;
+        for(int j=0; j<arr[i].size(); j++) {
+            cout << j << " : " << endl;
+            for(int k=0; k<arr[j].size(); k++) {
+                for(int l=0; l<arr[k].size(); l++) {
+                    cout << arr[i][j][k][l] << " ";
+                }
+                cout << endl;
+            }
+            cout << endl;
+        }
+    }
+}
 
 void printStrings(vector<string> arr){
     for(int i=0; i<arr.size(); i++){
@@ -303,8 +324,6 @@ void dfs(TreeNode *root){
 }
 
 int main(){
-    vector<int> a = {1,2,3,4,5};
-    return 0;
-}
 
+}
 // g++ -std=c++11

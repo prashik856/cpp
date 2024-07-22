@@ -1,7 +1,9 @@
 /*
 Problem Description
 
-Given a string A consisting only of lowercase characters, we need to check whether it is possible to make this string a palindrome after removing exactly one character from this.
+Given a string A consisting only of lowercase characters, 
+we need to check whether it is possible to make this string a 
+palindrome after removing exactly one character from this.
 
 If it is possible then return 1 else return 0.
 
