@@ -235,14 +235,14 @@ int main(){
     string input = "aaadha";
     cout << "Input: " << input << endl;
 
-    // vector<string> output = getAllPermutationsRecursion(input);
-    
-    // cout << "Output: " << endl;
-    // printStrings(output);
-
-    vector<string> output = getAllPermutationsBacktracking(input);
+    vector<string> output = getAllPermutationsRecursion(input);
     
     cout << "Output: " << endl;
     printStrings(output);
+
+    // vector<string> output = getAllPermutationsBacktracking(input);
+    
+    // cout << "Output: " << endl;
+    // printStrings(output);
 }
 // g++ -std=c++11
