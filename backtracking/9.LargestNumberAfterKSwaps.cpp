@@ -143,6 +143,7 @@ char getMax(string &s, int index) {
 void solve(string &input, int k, int index, string &output) {
     // cout << "Current Input: " << input << endl;
 
+    // Since our answer can be on any node.
     if(compareStrings(input, output)) {
         // tempOutput > output
         output = input;
@@ -173,6 +174,9 @@ void solve(string &input, int k, int index, string &output) {
         }
           
     }
+
+    // We don't swap anything but we move the index up.
+    solve(input, k, index+1, output);
     // cout << endl;
 }
 
