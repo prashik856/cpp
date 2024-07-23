@@ -12,12 +12,18 @@ When our current index == len(string) - 1;
 
 How to get all combinations:
 We start from currentIndex, and we go till the end of the string, swapping them in the process.
+the next index will just be index+1.
 
 Backtracking:
 We need to swap back as well for backtracking.
 
 How to handle duplicates?
 Here also, while swapping, we can use a set to check if we have already used the current alphabet for swapping.
+
+Time Complexity?
+Number of nodes will be of the factor of O(n!)
+Every node will have work done of O(n) [loop].
+Total time complexity: O(n * n!)
 */
 
 
