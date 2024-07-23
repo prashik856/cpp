@@ -224,11 +224,23 @@ vector<string> getAllPermutationsRecursion(string input) {
     return output;
 }
 
+
+vector<string> getAllPermutationsBacktracking(string input) {
+    vector<string> output = vector<string>();
+
+    return output;
+}
+
 int main(){
-    string input = "aaad";
+    string input = "aaadha";
     cout << "Input: " << input << endl;
 
-    vector<string> output = getAllPermutationsRecursion(input);
+    // vector<string> output = getAllPermutationsRecursion(input);
+    
+    // cout << "Output: " << endl;
+    // printStrings(output);
+
+    vector<string> output = getAllPermutationsBacktracking(input);
     
     cout << "Output: " << endl;
     printStrings(output);
