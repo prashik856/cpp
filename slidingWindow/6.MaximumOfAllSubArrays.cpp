@@ -26,49 +26,6 @@ void printVector(vector<int> arr){
     cout << endl;
 }
 
-void updateMaxValues(int &max1, int &max2, 
-    int &max1Index, int &max2Index, 
-    int value, int valueIndex) {
-    if(max1Index == -1 && max2Index == -1) {
-        max1 = value;
-        max1Index = valueIndex;
-    }
-
-    if(max2Index == -1 && max1Index != -1) {
-        if(value > max1) {
-            // Update max1 and max2
-            max2 = max1;
-            max2Index = max1Index;
-            max1 = value;
-            max1 = valueIndex;
-        } else {
-            // Update max2
-            max2 = value;
-            max2Index = valueIndex;
-        }
-    }
-
-    if(max1Index == -1 && max2Index  != -1) {
-        if(value>max2) {
-            max1 = value;
-            max1Index = valueIndex;
-        }
-    }
-
-    if(max1Index != -1 && max2Index != -1) {
-        if(value > max1) {
-            max2 = max1;
-            max2Index = max1Index;
-            max1 = value;
-            max1Index = valueIndex;
-        }
-        if(value > max2 && value < max1) {
-            max2 = value;
-            max2Index = valueIndex;
-        }
-    }
-}
-
 vector<int> maximumOfAllSubarrays(vector<int> &arr, int n) {
     vector<int> output = vector<int>();
 
