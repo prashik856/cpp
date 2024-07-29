@@ -39,6 +39,12 @@ int largestSubstringWithKUniqueCharacters(string &input, int k) {
             }
             j++;
         } else if(count == k) {
+            // got some output
+            int width = j - i + 1; // j is ahead
+            if(width > output) {
+                output = width;
+            }
+
             // process j
             if(mapping.find(item) == mapping.end()) {
                 // new item
@@ -47,12 +53,6 @@ int largestSubstringWithKUniqueCharacters(string &input, int k) {
             } else {
                 // already here
                 mapping[item] = mapping[item] + 1;
-            }
-
-            // got some output
-            int width = j - i + 1; // j is ahead
-            if(width > output) {
-                output = width;
             }
             j++;
         } else if(count > k) {
@@ -69,6 +69,16 @@ int largestSubstringWithKUniqueCharacters(string &input, int k) {
 
                 // increment i
                 i++;
+            }
+        }
+
+        // process after last element
+        if(j == input.size()) {
+            if(count == k) {
+                int width = j - i + 1; // j is ahead
+                if(width > output) {
+                    output = width;
+                }
             }
         }
     }
