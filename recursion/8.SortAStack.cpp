@@ -1,6 +1,7 @@
 /**
  * Sort a Stack
  * 
+ * Very similar to our sort an array using recursion problem.
  */
 
 #include<bits/stdc++.h>
