@@ -1,6 +1,10 @@
 /**
  * Reverse a stack using recursion
  * 
+ * I have used a queue here.
+ * 
+ * can we do without extra space?
+ * Can we done with another recursion step.
  */
 #include<bits/stdc++.h>
 using namespace std;
@@ -52,6 +56,38 @@ stack<int> reverseStack(stack<int> input, queue<int> &newQueue) {
     return input;
 }
 
+stack<int> putElement(stack<int> input, int value) {
+    if(input.empty()) {
+        input.push(value);
+        return input;
+    }
+
+    int topValue = input.top();
+    input.pop();
+
+    input = putElement(input, value);
+
+    // we have put our value at the bottom of the stack.
+    input.push(topValue);
+
+    return input;
+}
+
+stack<int> reverseStackWithoutQueue(stack<int> input) {
+    if(input.empty()) {
+        return input;
+    }
+
+    int topElement = input.top();
+    input.pop();
+
+    input = reverseStackWithoutQueue(input);
+
+    input = putElement(input, topElement);
+
+    return input;
+}
+
 int main() {
     stack<int> st = stack<int>({2,3,7,0,6,4,5,9,1,10});
     cout << "Input Stack: " << endl;
@@ -61,6 +97,11 @@ int main() {
 
     stack<int> output = reverseStack(st, newQueue);
     cout << "Output Stack: " << endl;
+    printStack(output);
+
+    // Does not use extra memory
+    output = reverseStackWithoutQueue(st);
+    cout << "Output Stack 2: " << endl;
     printStack(output);
 
     return 0;
