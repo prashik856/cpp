@@ -76,7 +76,7 @@ vector<int> sortRecursion(vector<int> input) {
 }
 
 int main() {
-    vector<int> input = vector<int>({2,3,7,6,4,5,9});
+    vector<int> input = vector<int>({2,3,7,0,6,4,5,9,1});
     cout << "Input array: " << endl;
     printVector(input);
 
