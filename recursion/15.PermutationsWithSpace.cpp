@@ -41,7 +41,7 @@ set<string> &allOutputs) {
     index++;
     getAllSpacePermutations(input, index, currentOutput, allOutputs);
 
-    // backtrack
+    // backtrack (black flash? JJK)
     currentOutput.pop_back();
     currentOutput.pop_back();
     return;
