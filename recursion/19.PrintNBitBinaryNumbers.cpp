@@ -18,7 +18,7 @@
  * BC will be when ones + zeroes == n && ones >= zeroes
  * We get our output.
  * 
- * Only when for every choice we have ones >= zeroes, we make that decision.
+ * Only when for every choice, when we have ones >= zeroes, we make that decision.
  * 
  */
 #include<bits/stdc++.h>
