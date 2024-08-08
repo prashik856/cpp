@@ -13,6 +13,12 @@
  * n=3
  * Output:
  * ["111", "110", "101"]
+ * 
+ * We can again use input output method for this.
+ * BC will be when ones + zeroes == n && ones >= zeroes
+ * We get our output.
+ * 
+ * 
  */
 #include<bits/stdc++.h>
 using namespace std;
@@ -29,28 +35,28 @@ void getAllBinaryNumbers(int n, int ones, int zeroes, string &currentOutput,
         }
 
         // put 1
-        currentOutput.push_back('1');
-        getAllBinaryNumbers(n, ones + 1, zeroes, currentOutput, allOutputs);
+        if(ones+1 >= zeroes) {
+            currentOutput.push_back('1');
+            getAllBinaryNumbers(n, ones + 1, zeroes, currentOutput, allOutputs);
 
-        // backtrack
-        currentOutput.pop_back();
-
-        // put 0
-        currentOutput.push_back('0');
-        // Number of zeroes cannot exceed maxZeroes
-        int maxZeroes = n/2;
-        if(zeroes + 1 <= maxZeroes) {
-            getAllBinaryNumbers(n, ones, zeroes + 1, currentOutput, allOutputs);
+            // backtrack
+            currentOutput.pop_back();
         }
 
-        // backtrack
-        currentOutput.pop_back();
+        // put 0
+        if(ones >= zeroes + 1) {
+            currentOutput.push_back('0');
+            getAllBinaryNumbers(n, ones, zeroes + 1, currentOutput, allOutputs);
+
+            // backtrack
+            currentOutput.pop_back();
+        }
 
         return;
     }
 
 int main() {
-    int n = 15;
+    int n = 10;
     cout << "Input: " << n << endl;
 
     vector<string> allOutputs = vector<string>();
