@@ -52,7 +52,7 @@
  * 
  * Induction:
  * There is no use of any person that dies
- * So, we just call the solve function with smaller input and updated index.
+ * So, nothing to do in induction.
  * 
  * 
  * Base Condition
