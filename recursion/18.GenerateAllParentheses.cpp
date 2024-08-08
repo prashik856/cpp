@@ -4,6 +4,8 @@
  * Given an integer A, generate all combinations of well formed parenthesis of length 2*A
  * 
  * We can use Input Output method here.
+ * 
+ * Since we have to consider choices + decisions here, this becomes a recursive question.
  */
 #include<bits/stdc++.h>
 using namespace std;
