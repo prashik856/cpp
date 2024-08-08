@@ -18,6 +18,7 @@
  * BC will be when ones + zeroes == n && ones >= zeroes
  * We get our output.
  * 
+ * Only when for every choice we have ones >= zeroes, we make that decision.
  * 
  */
 #include<bits/stdc++.h>
@@ -56,7 +57,7 @@ void getAllBinaryNumbers(int n, int ones, int zeroes, string &currentOutput,
     }
 
 int main() {
-    int n = 10;
+    int n = 5;
     cout << "Input: " << n << endl;
 
     vector<string> allOutputs = vector<string>();
