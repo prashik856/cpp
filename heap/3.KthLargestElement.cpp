@@ -7,6 +7,12 @@
  * arr: 7 10 4 3 20 15
  * K = 3
  * Output: 10
+ * 
+ * Identification:
+ * We are given a K, and we are asked a largest element.
+ * So, we can see that we can use sorting here.
+ * 
+ * We should always start with sorting solution, and then optimize it in the face to face interview.
  */
 
 #include<bits/stdc++.h>
