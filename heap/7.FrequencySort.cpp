@@ -13,6 +13,7 @@
  * first max heap is used to store values freq in decending order.
  * We use second min heap to store all index and freq pair of all values whole freq is same.
  * 
+ * We can also sort this by using our own compare function.
  */
 
 #include<bits/stdc++.h>
