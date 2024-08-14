@@ -33,3 +33,33 @@ void printVector(vector<char> arr){
     }
     cout << endl;
 }
+
+int binarySearcyInInfinitelySortedArray(vector<int> &input, int key) {
+    int output = -1;
+
+    int low = 0;
+    int high = 1;
+
+    while(key > input[high]) {
+        low = high;
+        high = high * 2;
+    }
+
+    // Now we have our low and high, and our key between input[low] and input[high]
+
+    while(high >= low) {
+        int mid = (high + low)/2;
+        if(input[mid] == key) {
+            output = mid;
+            break;
+        }
+
+        if(key > input[mid]) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+
+    return output;
+}
