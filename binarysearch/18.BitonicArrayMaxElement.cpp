@@ -9,6 +9,7 @@
  * Output: 3
  * 
  * A bitonic array is a array which will have only one peak.
+ * Monotonically increasing and then monotonically decreasing.
  * It will first increase and then reach peak, and then decrease.
  */
 #include<bits/stdc++.h>
