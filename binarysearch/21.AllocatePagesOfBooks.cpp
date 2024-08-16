@@ -132,6 +132,9 @@ void printVector(vector<int> arr){
 }
 
 int allocatePagesOfBooks(vector<int> &input, int key) {
+    if(key > input.size) {
+        return -1;
+    }
     int output = -1;
 
     int low = -1;
@@ -143,18 +146,20 @@ int allocatePagesOfBooks(vector<int> &input, int key) {
         }
     }
 
+    if(input.size() == key){
+        return low;   
+    }
+
+    int maxValue = low;
+
     cout << "Init low: " << low << "| Init high: " << high << endl;
     cout << endl;
 
     vector<int> scheme = vector<int>();
     int mid = high;
-    while(true) {
+    while(high >= low) {
         mid = low + (high - low)/2;
         cout << "low: " << low << " | high: " << high << "| Mid: " << mid << endl;
-
-        if(low == mid) {
-            break;
-        }
 
         // if we satisfy our schema perfectly
         int index = 0;
@@ -180,28 +185,35 @@ int allocatePagesOfBooks(vector<int> &input, int key) {
             output = mid;
 
             // can we optimize it by decreasing the value
-            high = mid;
+            high = mid-1;
         } else if(scheme.size() < key) {
             // decrease the mid value
-            high = mid;
+            high = mid-1;
         } else if(scheme.size() > key){
             // increase the mid value
-            low = mid;
+            low = mid+1;
         }
 
         scheme.clear();
         cout << endl;
     }
 
+    // this is the correct way.
+    // When our high < low, we set output to low.
+    // this submission worked.
+    if(output == -1) {
+        output = low;
+    }
+
     return output;
 }
 
 int main() {
-    vector<int> input = vector<int>({10, 20, 30, 40});
+    vector<int> input = vector<int>({15, 10, 19, 10, 5, 18, 7});
     cout << "Input vector: " << endl;
     printVector(input);
 
-    int students = 2;
+    int students = 5;
     cout << "Number of students: " << students << endl;
     cout << endl;
 
