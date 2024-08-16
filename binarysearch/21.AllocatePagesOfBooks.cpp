@@ -132,7 +132,7 @@ void printVector(vector<int> arr){
 }
 
 int allocatePagesOfBooks(vector<int> &input, int key) {
-    if(key > input.size) {
+    if(key > input.size()) {
         return -1;
     }
     int output = -1;
