@@ -92,13 +92,7 @@ vector<int> findKeyInMatrix(vector<vector<int>> &input, int key) {
         if(input[i][j] > key) {
             // go to left column
             j--;
-        } else if(input[i][j] < key && i+1 < n) {
-            if(input[i+1][j] <= key) {
-                i++;
-            } else {
-                j--;
-            }
-        } else if(input[i][j] < key && i+1 >= n) {
+        } else if(input[i][j] < key) {
             i++;
         }
     }
@@ -115,7 +109,7 @@ int main() {
     cout << "Input Matrix: " << endl;
     print2DVector(input);
 
-    int key = 36;
+    int key = 39;
     cout << "Key: " << key << endl;
     
     vector<int> output = findKeyInMatrix(input, key);
