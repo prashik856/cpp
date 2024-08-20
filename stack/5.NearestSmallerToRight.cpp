@@ -54,7 +54,7 @@ vector<long long> getNextSmallerToRight(vector<long long> &input, int n) {
 }
 
 int main() {
-    vector<long long> input = vector<long long>({5, 1, 3, 2, 4});
+    vector<long long> input = vector<long long>({4, 5, 2, 10, 8});
     cout << "Input: " << endl;
     printVector(input);
 
