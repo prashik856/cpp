@@ -1,17 +1,15 @@
 /**
- * Nearest Smaller to the Left
+ * Nearest Smaller to Right
  * 
- * Given an array of integers, find the closest (not considering distance but value)
- * smaller on the left of every element. If an element has no smaller on the left side,
- * print -1.
+ * Given an array of integers, find the closest (not considering distance, but value) 
+ * smaller on right of every element. If an element has no smaller on the right side, print -1.
  * 
- * Input: 
- * arr[]: {4, 5, 2, 25}
- * Output: {-1, 4, -1, 2}
+ * Input:
+ * arr[]: {1, 3, 2, 4}
+ * Output: {-1, 2, -1, -1}
  * 
- * This again a variation of the previous question.
- * Instead of greater element, we need to find a smaller element to the left
- * 
+ * This again is a variation of our previous question.
+ * this time, we need to find the nearest smaller element to the right.
  */
 #include<bits/stdc++.h>
 using namespace std;
@@ -23,12 +21,11 @@ void printVector(vector<long long> arr){
     cout << endl;
 }
 
-vector<long long> getNextSmallerToLeft(vector<long long> &input, int n) {
+vector<long long> getNextSmallerToRight(vector<long long> &input, int n) {
     vector<long long> output = vector<long long>(n, -1);
 
     stack<long long> st = stack<long long>();
-
-    for(int i=0; i<input.size(); i++) {
+    for(int i=n-1; i>=0; i--) {
         long long item = input[i];
 
         if(st.empty()) {
@@ -38,6 +35,7 @@ vector<long long> getNextSmallerToLeft(vector<long long> &input, int n) {
 
         while(!st.empty()) {
             long long top = st.top();
+
             if(top < item) {
                 output[i] = top;
                 st.push(item);
@@ -60,9 +58,10 @@ int main() {
     cout << "Input: " << endl;
     printVector(input);
 
-    vector<long long> output = getNextSmallerToLeft(input, input.size());
+    vector<long long> output = getNextSmallerToRight(input, input.size());
     cout << "Output: " << endl;
     printVector(output);
 
     return 0;
 }
+
