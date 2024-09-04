@@ -20,10 +20,20 @@
  * Basically we need to find a rectangle in this graph, whose area is maximum.
  * 
  * So, basically for every building, we need to see if we can expand it or not.
- * For that, what we can do is to calculate nearest smaller left and nearest smaller right
+ * For checking if we can expand it or not, we can do it by check if the building 
+ * to the left or right is greater than it's current value.
+ * For expansion, what we can do is to calculate nearest smaller left and nearest smaller right
  * of every element.
  * And then using the index of these nearest smaller left and right, we should be able to 
  * calculate the maximum area of the histogram.
+ * 
+ * Summing up:
+ * We create a right vector and a left vector which will store a next smaller value to
+ * right and next smaller value to left.
+ * Using these two vectors, we will get the maximum width that we can use.
+ * And using height as our arr value, we calculate the maximum area of the rectangle.
+ * 
+ * 
  */
 
 #include <iostream>
