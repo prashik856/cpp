@@ -138,7 +138,7 @@ vector<int> findMissingAndDuplicateUsingMath(vector<int> &arr) {
 }
 
 int main() {
-    vector<int> arr = vector<int>({1, 2, 3, 9, 5, 6, 7, 8, 9, 10});
+    vector<int> arr = vector<int>({10, 1, 2, 5, 4, 3, 9, 8, 7, 9});
     cout << "Input: " << endl;
 
     vector<int> output = findMissingAndDuplicateUsingMath(arr);
