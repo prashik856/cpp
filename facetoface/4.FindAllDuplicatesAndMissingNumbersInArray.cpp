@@ -6,6 +6,9 @@
  * Find these two numbers in order of one space.
  * Input:[3 1 1 5 3] 
  * Duplicate = 3,1  Missing = 2,4 . 
+ * 
+ * Time complexity of algorithm is O(n).
+ * 
  */
 #include <iostream>
 #include<vector>
