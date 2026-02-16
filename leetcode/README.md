@@ -8,5 +8,5 @@ This repo contains the code which I wrote to solve the leetcode problems. The so
 g++ -std=c++11 filename.cpp -o filename.out
 
 # Run the file
-./filenamme.out
+./filename.out
 ```
