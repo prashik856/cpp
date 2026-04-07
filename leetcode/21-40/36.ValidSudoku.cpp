@@ -47,6 +47,15 @@ Constraints:
 #include<bits/stdc++.h>
 using namespace std;
 
+void printBoard(vector<vector<char>> &board) {
+    for(int i=0; i<board.size(); i++) {
+        for(int j=0; j<board[0].size(); j++) {
+            cout << board[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
 bool isValidSudoku(vector<vector<char>>& board) {
     bool result = false;
 
@@ -57,7 +66,7 @@ bool isValidSudoku(vector<vector<char>>& board) {
         // cout << "Current Row: " << endl;
         for (int j=0; j<board[i].size(); j++) {
             char val = board[i][j];
-            cout << val << " ";
+            // cout << val << " ";
             if(val == '.') {
                 continue;
             }
@@ -68,7 +77,7 @@ bool isValidSudoku(vector<vector<char>>& board) {
                 return result;
             }
         }
-        cout << endl;
+        // cout << endl;
     }
 
     // check each column
@@ -157,6 +166,7 @@ int main() {
 
     for (int i=0; i<inputs.size(); i++) {
         cout << "Input: " << endl;
+        printBoard(inputs[i]);
 
         bool output = isValidSudoku(inputs[i]);
         cout << "Output : " << output << endl;
